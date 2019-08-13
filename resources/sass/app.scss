@@ -1,0 +1,48 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.card-columns {
+    @include media-breakpoint-only(lg) {
+        column-count: 4;
+    }
+    @include media-breakpoint-only(xl) {
+        column-count: 5;
+    }
+}
+
+.navbar {
+    background-color: #4287f5 !important;
+
+    .nav-item.dropdown {
+
+        .dropdown-menu {
+
+            a {
+                color: #000000 !important;
+            }
+
+        }
+
+    }
+
+}
+
+.card-header {
+    background-color: #4287f5 !important;
+    color: #ffffff !important;
+}
+
+.navbar a {
+    color: #ffffff !important;
+}
+
+a.custom-card,
+a.custom-card:hover {
+  color: inherit;
+}
