@@ -73,7 +73,7 @@
                                         My Profile
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('stories.feed') }}">
+                                    <a class="dropdown-item" href="{{ route('stories.index') }}">
                                         My Stories
                                     </a>
 
