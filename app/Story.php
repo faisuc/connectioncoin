@@ -28,6 +28,11 @@ class Story extends Model
         return $this->belongsTo('App\Coin');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
     public function lastTwoUsersWhoPostedUsingThisCoin()
     {
         return Story::where('coin_id', $this->coin_id)->latest()->take(2)->get();

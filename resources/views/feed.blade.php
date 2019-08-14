@@ -24,6 +24,7 @@
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">{{ $story->theFormattedTimeAgo }}</small>
+                        <button class="btn btn-theme pull-right" type="button" id="toleft">123</button>
                     </div>
                 </div>
             </a>

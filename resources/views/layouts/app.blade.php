@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -73,7 +73,7 @@
                                         My Profile
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('stories.index') }}">
+                                    <a class="dropdown-item" href="{{ route('stories.feed') }}">
                                         My Stories
                                     </a>
 

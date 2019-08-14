@@ -16,6 +16,10 @@ use App\Role;
 use App\Story;
 use Illuminate\Support\Facades\Storage;
 
+Route::get('stories', function () {
+    return redirect()->route('stories.index');
+});
+
 Route::get('/', 'StoryController@index')->name('stories.index');
 
 Auth::routes(['verify' => true]);
@@ -39,6 +43,10 @@ Route::middleware(['auth', 'role:admin|client'])->group(function () {
 Route::get('test', function () {
 
     $story = new Story;
-    dd($story->find(11)->lastTwoUsersWhoPostedUsingThisCoin());
+    foreach ($story->find(11)->lastTwoUsersWhoPostedUsingThisCoin() as $story) {
+        echo $story->user->name . '<br />';
+    }
+
+    exit;
 
 });
