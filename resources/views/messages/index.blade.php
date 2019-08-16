@@ -25,8 +25,8 @@
                                 <div class="chat_people">
                                 <div class="chat_img"> <img src="{{ $user->thePhoto }}" alt="sunil"> </div>
                                     <div class="chat_ib">
-                                    <h5>{{ $user->name }} <span class="chat_date">{{ $user->getLastMessage()->theFormattedTimeAgo }}</span></h5>
-                                    <p>{{ $user->getLastMessage()->text }}</p>
+                                    <h5>{{ $user->name }} <span class="chat_date">{{ ! is_null($user->getLastMessage()) ? $user->getLastMessage()->theFormattedTimeAgo : '' }}</span></h5>
+                                    <p>{{ ! is_null($user->getLastMessage()) ? $user->getLastMessage()->text : '' }}</p>
                                     </div>
                                 </div>
                             </a>
