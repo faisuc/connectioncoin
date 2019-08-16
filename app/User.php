@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Traits\HasRoles;
+use App\Message;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -43,6 +44,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function stories()
     {
         return $this->hasMany('App\Story');
+    }
+
+    public function messages()
+    {
+        return Message::where('from_user_id', $this->id)->orWhere('to_user_id', $this->id)->get();
+    }
+
+    public function getLastMessage()
+    {
+        return Message::where('from_user_id', $this->id)->where('to_user_id', auth()->id())->latest()->first();
     }
 
     public function getThePhotoAttribute()

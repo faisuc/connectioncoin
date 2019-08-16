@@ -7,10 +7,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    @auth
+        <meta name="user-id" content="{{ auth()->id() }}">
+    @endauth
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -57,7 +58,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('messages.index') }}" class="nav-link">
                                     Messages
                                 </a>
                             </li>
@@ -98,5 +99,11 @@
             @yield('content')
         </main>
     </div>
+    <!-- Scripts -->
+    <script type="text/javascript">
+        var APP_URL = {!! json_encode(url('/')) !!}
+    </script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    @yield('js')
 </body>
 </html>

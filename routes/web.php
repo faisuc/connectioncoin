@@ -12,8 +12,11 @@
 */
 
 use App\Coin;
+use App\Message;
 use App\Role;
 use App\Story;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 Route::get('stories', function () {
@@ -32,7 +35,11 @@ Route::middleware(['auth', 'verified', 'role:admin|client'])->group(function () 
 
     Route::resource('stories', 'StoryController')->except(['index']);
 
+    Route::get('/conversations/{user_id}', 'MessageController@getMessagesFor');
+
     Route::resource('users', 'UserController')->except(['edit', 'update']);
+
+    Route::resource('messages', 'MessageController');
 
 });
 
@@ -41,6 +48,14 @@ Route::middleware(['auth', 'role:admin|client'])->group(function () {
 });
 
 Route::get('test', function () {
+
+    $messages = Auth::user()->messages();
+
+    foreach ($messages as $message) {
+        echo $message->text . '<br />';
+    }
+
+    exit;
 
     $file = 'D:/PROJECTS/HOMESTEAD/madhatmedia/connectioncoin/storage/app/public/story/images/14QbybvgZebaHG7cnynsX77NmHanl8wnODvhb4mM.jpeg';
     $file = pathinfo($file, PATHINFO_FILENAME);
@@ -58,6 +73,11 @@ Route::get('test', function () {
     $story->find(11)->getTheLastUsersWhoPostedUsingThisCoin(10);
 
     dd(\DB::getQueryLog());
+
+    $contacts = User::where('id', '<>', auth()->id())->get();
+
+    // getMessagesFor($id)
+    // $messages = Message::where('from', $id)->orWhere('to', $id)->get();
 
     exit;
 

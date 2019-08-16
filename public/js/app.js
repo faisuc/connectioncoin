@@ -49218,6 +49218,161 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
+jQuery(document).ready(function ($) {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  var socket = io.connect(APP_URL + ":3001");
+
+  function clientExists() {
+    var count = $('.messaging .inbox_chat .chat_list').length;
+
+    if (count > 0) {
+      $('.messaging .inbox_chat .chat_list:first-child a').trigger('click');
+    }
+  }
+
+  function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    today = mm + '/' + dd + '/' + yyyy;
+    return strTime + ' | ' + today;
+  }
+
+  function clearChat() {
+    $('.msg_history').html('');
+    $('.write_msg').val('');
+    $('.write_msg').focus();
+  }
+
+  function getMessages(user_id) {
+    $.ajax({
+      type: 'GET',
+      url: '/conversations/' + user_id,
+      success: function success(data) {
+        if (data.length) {
+          var msg = '';
+
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].from_user_id == $('meta[name="user-id"]').attr('content')) {
+              msg += "<div class=\"outgoing_msg\">\n                                <div class=\"sent_msg\">\n                                <p>" + data[i].text + "</p>\n                                <span class=\"time_date\">" + formatAMPM(new Date()) + "</span></div>\n                            </div>";
+            } else {
+              msg += "<div class=\"incoming_msg\">\n                                <div class=\"incoming_msg_img\"> <img src=\"https://ptetutorials.com/images/user-profile.png\" alt=\"sunil\"> </div>\n                                <div class=\"received_msg\">\n                                <div class=\"received_withd_msg\">\n                                    <p>" + data[i].text + "</p>\n                                    <span class=\"time_date\">" + formatAMPM(new Date()) + "</span></div>\n                                </div>\n                            </div>";
+            }
+          }
+
+          $('.msg_history').append(msg);
+          var div = $('.msg_history');
+          div.scrollTop(div.prop('scrollHeight'));
+        }
+      }
+    });
+  }
+
+  function sendMessage(to_user_id, text) {
+    $.ajax({
+      type: 'POST',
+      url: '/messages',
+      data: {
+        to_user_id: to_user_id,
+        text: text
+      },
+      success: function success(data) {
+        console.log(data);
+      }
+    });
+  }
+
+  socket.emit('add user', {
+    'user_id': $('meta[name="user-id"]').attr('content')
+  });
+  $(document).on('click', '.messaging .inbox_chat .chat_list a', function (e) {
+    e.preventDefault();
+    var chatUrl = $(this).attr('href');
+    var user_id = $(this).attr('data-user-id');
+    history.pushState({
+      id: 'messages',
+      user_id: user_id
+    }, 'Test', chatUrl);
+    $('.messaging .inbox_chat .chat_list').removeClass('active_chat');
+    $('.msg_history').removeAttr('data-user-id');
+    $('.msg_history').attr('data-user-id', user_id);
+    $(this).parent().addClass('active_chat');
+    getMessages(user_id);
+    clearChat();
+  });
+  clientExists();
+  window.addEventListener('popstate', function (event) {
+    if (history.state && history.state.id === 'messages') {
+      if (history.state.user_id) {
+        $('.messaging .inbox_chat .chat_list:first-child a[data-user-id="' + history.state.user_id + '"]').trigger('click');
+        $('.msg_history').removeAttr('data-user-id');
+        $('.msg_history').attr('data-user-id', history.state.user_id);
+        clearChat();
+      }
+    }
+  }, false);
+  $(document).on('click', '.msg_send_btn', function (e) {
+    e.preventDefault();
+    var message = $.trim($('.write_msg').val());
+    var count = $('.messaging .inbox_chat .chat_list').length;
+
+    if (count > 0) {
+      var msg = '';
+      msg += "<div class=\"outgoing_msg\">\n                        <div class=\"sent_msg\">\n                        <p>" + message + "</p>\n                        <span class=\"time_date\">" + formatAMPM(new Date()) + "</span></div>\n                    </div>";
+      $('.msg_history').append(msg);
+      $('.write_msg').val('');
+      $('.write_msg').focus();
+
+      if (message != '') {
+        socket.emit('send chat message', {
+          'from_user_id': $('meta[name="user-id"]').attr('content'),
+          'send_to_user_id': $('.msg_history').attr('data-user-id'),
+          'message': message,
+          'action': 'outgoing'
+        });
+        sendMessage($('.msg_history').attr('data-user-id'), message);
+      }
+
+      var div = $('.msg_history');
+      div.scrollTop(div.prop('scrollHeight'));
+    }
+  });
+  socket.on('send chat message triggered', function (data) {
+    var msg = '';
+    msg += "<div class=\"incoming_msg\">\n            <div class=\"incoming_msg_img\"> <img src=\"https://ptetutorials.com/images/user-profile.png\" alt=\"sunil\"> </div>\n            <div class=\"received_msg\">\n              <div class=\"received_withd_msg\">\n                <p>" + data.message + "</p>\n                <span class=\"time_date\">" + formatAMPM(new Date()) + "</span></div>\n            </div>\n          </div>";
+    $('.msg_history[data-user-id=' + parseInt(data.from_user_id) + ']').append(msg);
+    var div = $('.msg_history');
+    div.scrollTop(div.prop('scrollHeight'));
+  });
+  $(document).on('keypress', function (e) {
+    if (e.which == 13) {
+      $('.msg_send_btn').trigger('click');
+    }
+  });
+});
 
 /***/ }),
 
