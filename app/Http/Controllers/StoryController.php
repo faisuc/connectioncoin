@@ -9,6 +9,8 @@ use App\User;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Image\Image;
+use Spatie\Image\Manipulations;
 
 class StoryController extends Controller
 {
@@ -62,8 +64,8 @@ class StoryController extends Controller
         $this->validate($request, [
             'title' => 'required|min:3',
             'description' => 'required|min:5',
-            'image' => 'required|image'
-        ]);
+            'image' => 'required|image|dimensions:min_width=250,min_height:500'
+        ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
 
         $attributes = array_merge(
             [
@@ -76,8 +78,24 @@ class StoryController extends Controller
         $story = Story::create($attributes);
 
         if ($request->hasFile('image')) {
-            $path = Storage::putfile('public/story/images', $request->file('image'));
-            StoryImage::create(['story_id' => $story->id, 'filepath' => $path]);
+
+            $filenameWithExtension = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+            $extension =$request->file('image')->getClientOriginalExtension();
+            $time = time();
+            $filenameToStore = $filename . '_' . $time . '.' . $extension;
+            $filenameToStoreResize = $filename . '_' . $time . '-497x290.' . $extension;
+
+            $request->file('image')->storeAs('public/story/images', $filenameToStore);
+
+            // $path = Storage::putfile('public/story/images', $request->file('image'));
+
+            Image::load(storage_path('app/public/story/images/' . $filenameToStore))
+                    ->fit(Manipulations::FIT_FILL, 497, 290)
+                    ->save(storage_path('app/public/story/images/' . $filenameToStoreResize));
+
+            // $path = Storage::putfile('public/story/images', $request->file('image'));
+            StoryImage::create(['story_id' => $story->id, 'filepath' => 'public/story/images/' . $filenameToStore]);
         }
 
         return redirect()->route('stories.show', ['story' => $story])->with('success', 'Story has been added.');
@@ -125,8 +143,8 @@ class StoryController extends Controller
         $this->validate($request, [
             'title' => 'required|min:3',
             'description' => 'required|min:5',
-            'image' => 'nullable|image'
-        ]);
+            'image' => 'nullable|image|dimensions:min_width=250,min_height:500'
+        ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
 
         $story = Story::find($story->id);
         $story->user_id = auth()->id();
@@ -140,10 +158,24 @@ class StoryController extends Controller
         $story->save();
 
         if ($request->hasFile('image')) {
-            $path = Storage::putfile('public/story/images', $request->file('image'));
+
+            $filenameWithExtension = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+            $extension =$request->file('image')->getClientOriginalExtension();
+            $time = time();
+            $filenameToStore = $filename . '_' . $time . '.' . $extension;
+            $filenameToStoreResize = $filename . '_' . $time . '-497x290.' . $extension;
+
+            $request->file('image')->storeAs('public/story/images', $filenameToStore);
+
+            // $path = Storage::putfile('public/story/images', $request->file('image'));
+
+            Image::load(storage_path('app/public/story/images/' . $filenameToStore))
+                    ->fit(Manipulations::FIT_FILL, 497, 290)
+                    ->save(storage_path('app/public/story/images/' . $filenameToStoreResize));
 
             $storyImage = StoryImage::find($story->id);
-            $storyImage->filepath = $path;
+            $storyImage->filepath = 'public/story/images/' . $filenameToStore;
             $storyImage->save();
         }
 

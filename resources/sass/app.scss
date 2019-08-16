@@ -7,6 +7,8 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+
 .card-columns {
     @include media-breakpoint-only(lg) {
         column-count: 4;
@@ -45,4 +47,11 @@
 a.custom-card,
 a.custom-card:hover {
   color: inherit;
+}
+
+.card {
+
+    a:hover {
+        text-decoration: none;
+    }
 }

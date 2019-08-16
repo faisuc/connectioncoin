@@ -42,10 +42,22 @@ Route::middleware(['auth', 'role:admin|client'])->group(function () {
 
 Route::get('test', function () {
 
+    $file = 'D:/PROJECTS/HOMESTEAD/madhatmedia/connectioncoin/storage/app/public/story/images/14QbybvgZebaHG7cnynsX77NmHanl8wnODvhb4mM.jpeg';
+    $file = pathinfo($file, PATHINFO_FILENAME);
+
+    dd($file);
+
+    dd(public_path());
+    $storagePath = Storage::getDriver()->getAdapter()->getPathPrefix();
+
+    dd($storagePath);
+
+    \DB::enableQueryLog();
+
     $story = new Story;
-    foreach ($story->find(11)->lastTwoUsersWhoPostedUsingThisCoin() as $story) {
-        echo $story->user->name . '<br />';
-    }
+    $story->find(11)->getTheLastUsersWhoPostedUsingThisCoin(10);
+
+    dd(\DB::getQueryLog());
 
     exit;
 

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">Create Story</div>
+                <div class="card-header">Edit Story</div>
 
                 <div class="card-body">
                     @sharedAlerts

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use File;
 
 class Story extends Model
 {
@@ -33,9 +34,15 @@ class Story extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
-    public function lastTwoUsersWhoPostedUsingThisCoin()
+    public function getTheLastUsersWhoPostedUsingThisCoin($take = 2)
     {
-        return Story::where('coin_id', $this->coin_id)->latest()->take(2)->get();
+        $coins = $this->withTrashed()->where('coin_id', $this->coin_id)->latest()->take($take)->get();
+
+        $users = $coins->map(function ($coin) {
+            return  $coin->user;
+        });
+
+        return $users;
     }
 
     public function image()
@@ -64,6 +71,23 @@ class Story extends Model
     {
         if (isset($this->image->filepath)) {
             return Storage::url($this->image->filepath);
+        } else {
+            return 'https://www.sylvansport.com/wp/wp-content/uploads/2018/11/image-placeholder-1200x800.jpg';
+        }
+    }
+
+    public function getTheResizedImageAttribute()
+    {
+        if (isset($this->image->filepath)) {
+
+            $filename = pathinfo(storage_path('app/' . $this->image->filepath), PATHINFO_FILENAME);
+            $extension = pathinfo(storage_path('app/' . $this->image->filepath), PATHINFO_EXTENSION);
+
+            if (File::exists(storage_path('app/public/story/images/' . $filename . '-497x290.' . $extension))) {
+                return Storage::url('public/story/images/' . $filename . '-497x290.' . $extension);
+            }
+
+            return $this->theImage;
         } else {
             return 'https://www.sylvansport.com/wp/wp-content/uploads/2018/11/image-placeholder-1200x800.jpg';
         }
