@@ -41,6 +41,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['thePhoto'];
+
     public function stories()
     {
         return $this->hasMany('App\Story');
@@ -48,7 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function messages()
     {
-        return Message::where('from_user_id', $this->id)->orWhere('to_user_id', $this->id)->get();
+        return $this->hasMany('App\Message', 'id', 'from_user_id')->groupBy('to_user_id');
     }
 
     public function getLastMessage()

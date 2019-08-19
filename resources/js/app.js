@@ -88,8 +88,16 @@ jQuery(document).ready(function ($) {
 
     }
 
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
     function getMessages(user_id)
     {
+        $('.msg_history').html('');
         $.ajax({
             type: 'GET',
             url: '/messages/' + user_id,
@@ -171,8 +179,6 @@ jQuery(document).ready(function ($) {
 
     });
 
-    clientExists();
-
     window.addEventListener('popstate', function (event) {
         if (history.state && history.state.id === 'messages') {
             if (history.state.user_id) {
@@ -248,5 +254,55 @@ jQuery(document).ready(function ($) {
             $('.msg_send_btn').trigger('click');
         }
     });
+
+
+    if (getUrlParameter('user')) {
+
+        var user_id = getUrlParameter('user');
+
+        if (user_id == null) {
+            clientExists();
+            return;
+        }
+
+        if ($('.messaging .chat_list a[data-user-id="' + user_id + '"]').length) {
+            $('.messaging .chat_list a[data-user-id="' + user_id + '"]').trigger('click');
+        } else {
+
+            $.ajax({
+                type: 'GET',
+                url: '/users/info/' + getUrlParameter('user'),
+                success: function (data) {
+                    var html = '';
+
+                    html += `<div class="chat_list active_chat">
+                                <a href="#" data-user-id="` + data.id + `">
+                                    <div class="chat_people">
+                                        <div class="chat_img">
+                                            <img src="` + data.thePhoto + `" alt="sunil">
+                                        </div>
+                                        <div class="chat_ib">
+                                            <h5>` + data.name + `</h5>
+                                            <p>i'm good</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>`;
+
+                    $('.messaging .chat_list').removeClass('active_chat');
+
+                    $('.messaging .inbox_chat').prepend(html);
+
+                    $('.msg_history').attr('data-user-id', data.id);
+                    $('.msg_history').html('');
+
+                },
+                error: function(xhr, status, error) {
+                    alert('User not found');
+                }
+            });
+        }
+
+    }
 
 });

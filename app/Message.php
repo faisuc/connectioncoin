@@ -19,4 +19,9 @@ class Message extends Model
         return $this->created_at->diffForHumans();
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'from_user_id');
+    }
+
 }

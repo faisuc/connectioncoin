@@ -11,7 +11,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('verified')->except('edit', 'update');
+        $this->middleware('verified')->except('edit', 'update', 'show');
     }
 
     /**

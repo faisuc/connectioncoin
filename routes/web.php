@@ -37,11 +37,14 @@ Route::middleware(['auth', 'verified', 'role:admin|client'])->group(function () 
 
     // Route::get('/conversations/{user_id}', 'MessageController@getMessagesFor');
 
-    Route::get('users/{user}/coins', 'ShowUserCoinsController')->name('users.coins.index');
+    Route::get('users/info/{user}', function ($user) {
+        if ((int) $user == auth()->id()) {
+            abort(404);
+        }
+        return response()->json(User::findOrFail($user), 200);
+    });
 
-    Route::get('users/{user}/stories', 'ShowUserStoriesController')->name('users.stories.index');
-
-    Route::resource('users', 'UserController')->except(['edit', 'update']);
+    Route::resource('users', 'UserController')->except(['edit', 'update', 'show']);
 
     Route::resource('messages', 'MessageController')->except(['show']);
 
@@ -52,6 +55,13 @@ Route::middleware(['auth', 'verified', 'role:admin|client'])->group(function () 
 Route::middleware(['auth', 'role:admin|client'])->group(function () {
     Route::resource('users', 'UserController')->only('edit', 'update');
 });
+
+
+Route::get('users/{user}/coins', 'ShowUserCoinsController')->name('users.coins.index');
+
+Route::get('users/{user}/stories', 'ShowUserStoriesController')->name('users.stories.index');
+
+Route::get('users/{user}', 'UserController@show')->name('users.show');
 
 Route::get('test', function () {
 

@@ -16,9 +16,8 @@ class MessageController extends Controller
     public function index()
     {
 
-        $users = User::where('id', '!=', auth()->id())->get();
-
-        $this->views['users'] = $users;
+        $messages = Message::select('from_user_id')->where('to_user_id', auth()->id())->groupBy('from_user_id')->get();
+        $this->views['messages'] = $messages;
 
         return view('messages.index', $this->views);
     }

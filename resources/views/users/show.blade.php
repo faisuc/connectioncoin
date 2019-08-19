@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="{{ route('users.update', ['user' => $user]) }}" enctype="multipart/form-data" class="row">
     @csrf
     @method('PATCH')
     <div class="container">
@@ -11,7 +10,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Update Profile</div>
+                    <div class="card-header">Profile</div>
 
                     <div class="card-body">
                         @sharedAlerts
@@ -27,10 +26,14 @@
                         @can('update', $user)
                             <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-primary btn-lg">Edit Profile</a>
                         @endcan
+                        @auth
+                            @can('message-user', $user)
+                                <a href="{{ route('messages.index', ['user' => $user]) }}" class="btn btn-secondary btn-lg"><i class="fas fa-paper-plane"></i> Message</a>
+                            @endcan
+                        @endauth
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</form>
 @endsection

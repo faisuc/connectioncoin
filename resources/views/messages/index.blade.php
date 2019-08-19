@@ -19,14 +19,14 @@
                     </div> --}}
                 </div>
                 <div class="inbox_chat">
-                    @foreach ($users as $user)
+                    @foreach ($messages as $message)
                         <div class="chat_list">
-                            <a href="#" data-user-id="<?php echo $user->id; ?>">
+                            <a href="#" data-user-id="<?php echo $message->user->id; ?>">
                                 <div class="chat_people">
-                                <div class="chat_img"> <img src="{{ $user->thePhoto }}" alt="sunil"> </div>
+                                <div class="chat_img"> <img src="{{ $message->user->thePhoto }}" alt="sunil"> </div>
                                     <div class="chat_ib">
-                                    <h5>{{ $user->name }} <span class="chat_date">{{ ! is_null($user->getLastMessage()) ? $user->getLastMessage()->theFormattedTimeAgo : '' }}</span></h5>
-                                    <p>{{ ! is_null($user->getLastMessage()) ? $user->getLastMessage()->text : '' }}</p>
+                                    <h5>{{ $message->user->name }} <span class="chat_date">{{ ! is_null($message->user->getLastMessage()) ? $message->user->getLastMessage()->theFormattedTimeAgo : '' }}</span></h5>
+                                    <p>{{ ! is_null($message->user->getLastMessage()) ? $message->user->getLastMessage()->text : '' }}</p>
                                     </div>
                                 </div>
                             </a>

@@ -31,6 +31,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('message-user', function ($user, $model) {
+            return $user->id != $model->id;
+        });
     }
 }

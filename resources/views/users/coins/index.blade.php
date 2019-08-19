@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="" enctype="multipart/form-data" class="row">
     @csrf
     @method('PATCH')
     <div class="container">
@@ -34,5 +33,4 @@
             </div>
         </div>
     </div>
-</form>
 @endsection

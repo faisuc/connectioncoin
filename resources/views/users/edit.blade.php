@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="{{ route('users.update', ['user' => $user]) }}" enctype="multipart/form-data" class="row">
+<form method="POST" action="{{ route('users.update', ['user' => $user]) }}" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
     <div class="container">
@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Update Profile</div>
+                    <div class="card-header">Edit Profile</div>
 
                     <div class="card-body">
                         @sharedAlerts
