@@ -190,3 +190,7 @@ a.custom-card:hover {
     height: 516px;
     overflow-y: auto;
   }
+
+ul.list-connection-users li:not(:first-of-type) {
+  margin-left: -16px;
+}

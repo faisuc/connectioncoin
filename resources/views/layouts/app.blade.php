@@ -70,12 +70,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item" href="{{ route('users.edit', ['user' => auth()->id()]) }}">
+                                    <a class="dropdown-item" href="{{ route('users.show', ['user' => auth()->id()]) }}">
                                         My Profile
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('stories.index') }}">
-                                        My Stories
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

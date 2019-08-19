@@ -53,7 +53,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $this->views['user'] = $user;
+        return view('users.show', $this->views);
     }
 
     /**

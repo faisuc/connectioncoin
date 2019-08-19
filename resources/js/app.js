@@ -92,7 +92,7 @@ jQuery(document).ready(function ($) {
     {
         $.ajax({
             type: 'GET',
-            url: '/conversations/' + user_id,
+            url: '/messages/' + user_id,
             success: function (data) {
                 if (data.length) {
 

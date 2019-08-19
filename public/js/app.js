@@ -49270,7 +49270,7 @@ jQuery(document).ready(function ($) {
   function getMessages(user_id) {
     $.ajax({
       type: 'GET',
-      url: '/conversations/' + user_id,
+      url: '/messages/' + user_id,
       success: function success(data) {
         if (data.length) {
           var msg = '';

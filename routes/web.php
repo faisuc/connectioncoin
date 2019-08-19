@@ -35,11 +35,17 @@ Route::middleware(['auth', 'verified', 'role:admin|client'])->group(function () 
 
     Route::resource('stories', 'StoryController')->except(['index']);
 
-    Route::get('/conversations/{user_id}', 'MessageController@getMessagesFor');
+    // Route::get('/conversations/{user_id}', 'MessageController@getMessagesFor');
+
+    Route::get('users/{user}/coins', 'ShowUserCoinsController')->name('users.coins.index');
+
+    Route::get('users/{user}/stories', 'ShowUserStoriesController')->name('users.stories.index');
 
     Route::resource('users', 'UserController')->except(['edit', 'update']);
 
-    Route::resource('messages', 'MessageController');
+    Route::resource('messages', 'MessageController')->except(['show']);
+
+    Route::get('messages/{message?}', 'MessageController@show')->name('messages.show');
 
 });
 

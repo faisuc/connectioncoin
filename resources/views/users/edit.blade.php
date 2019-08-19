@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <img class="card-img-top" src="{{ $user->thePhoto }}" alt="Card image cap">
+                @include('users.partials.sidebar')
             </div>
             <div class="col-md-8">
                 <div class="card">

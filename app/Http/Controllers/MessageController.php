@@ -56,9 +56,22 @@ class MessageController extends Controller
      * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    public function show($user_id, Request $request)
     {
 
+        if (!$request->ajax()) {
+            abort(404);
+        }
+
+        $messages = Message::where(function ($q) use ($user_id) {
+            $q->where('from_user_id', auth()->id());
+            $q->where('to_user_id', $user_id);
+        })->orWhere(function ($q) use ($user_id) {
+            $q->where('from_user_id', $user_id);
+            $q->where('to_user_id', auth()->id());
+        })->get();
+
+        return response()->json($messages);
     }
 
     /**
@@ -93,19 +106,6 @@ class MessageController extends Controller
     public function destroy(Message $message)
     {
         //
-    }
-
-    public function getMessagesFor($user_id)
-    {
-        $messages = Message::where(function ($q) use ($user_id) {
-            $q->where('from_user_id', auth()->id());
-            $q->where('to_user_id', $user_id);
-        })->orWhere(function ($q) use ($user_id) {
-            $q->where('from_user_id', $user_id);
-            $q->where('to_user_id', auth()->id());
-        })->get();
-
-        return response()->json($messages);
     }
 
 }
