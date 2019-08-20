@@ -34,6 +34,11 @@ class Story extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
     public function getTheLastUsersWhoPostedUsingThisCoin($take = 2)
     {
         $coins = $this->withTrashed()->where('coin_id', $this->coin_id)->latest()->take($take)->get();

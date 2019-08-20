@@ -50,6 +50,8 @@ Route::middleware(['auth', 'verified', 'role:admin|client'])->group(function () 
 
     Route::get('messages/{message?}', 'MessageController@show')->name('messages.show');
 
+    Route::resource('comments', 'CommentController');
+
 });
 
 Route::middleware(['auth', 'role:admin|client'])->group(function () {

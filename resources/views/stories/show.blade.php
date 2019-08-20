@@ -2,9 +2,8 @@
 
 @section('content')
 <div class="container">
-    @sharedAlerts
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-8">
             <div class="card mb-3">
                 <img class="card-img-top" src="{{ $story->theImage }}" alt="Card image cap">
                 <div class="card-body">
@@ -28,6 +27,28 @@
                         <a href="{{ route('users.show', ['user' => $story->user]) }}"><img src="{{ $story->user->thePhoto }}" title="{{ $story->user->name }}" class="img-thumbnail rounded-circle" style="width: 30px; height: 30px;"></a></small>
                 </div>
             </div>
+        </div>
+        <div class="col-md-4">
+            <h3>Comments</h3>
+            @sharedAlerts
+            <div class="comments-container">
+                @foreach ($comments as $comment)
+                    <div class="card border-primary mb-3">
+                        <div class="card-body text-primary">
+                            <p class="card-text">{!! $comment->text !!}</p>
+                            <small>{{ $comment->user->name }} - {{ $comment->theCreatedAt }}</small>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <form action="{{ route('comments.store') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <textarea class="form-control form-control-lg" required name="text" id="text" placeholder="Comment..."></textarea>
+                </div>
+                <input type="hidden" name="story_id" value="{{ $story->id }}">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </div>
 </div>

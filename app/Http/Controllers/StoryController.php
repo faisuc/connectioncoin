@@ -111,6 +111,7 @@ class StoryController extends Controller
     public function show(Story $story)
     {
         $this->views['story'] = $story;
+        $this->views['comments'] = $story->find($story->id)->comments()->with('user')->get();
 
         return view('stories.show', $this->views);
     }
