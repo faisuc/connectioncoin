@@ -52,6 +52,8 @@ Route::middleware(['auth', 'verified', 'role:admin|client'])->group(function () 
 
     Route::resource('comments', 'CommentController');
 
+    Route::post('/like/story', 'StoryLikeController@store');
+
 });
 
 Route::middleware(['auth', 'role:admin|client'])->group(function () {
@@ -66,6 +68,13 @@ Route::get('users/{user}/stories', 'ShowUserStoriesController')->name('users.sto
 Route::get('users/{user}', 'UserController@show')->name('users.show');
 
 Route::get('test', function () {
+
+    dd(getEmotions());
+    foreach (Story::find(17)->likes as $like) {
+        echo $like->reaction_id;
+    }
+
+    exit;
 
     $messages = Auth::user()->messages();
 

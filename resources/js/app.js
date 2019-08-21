@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('../lib/faceMocion/faceMocion.js');
 
 window.Vue = require('vue');
 
@@ -32,6 +33,29 @@ const app = new Vue({
 });
 
 jQuery(document).ready(function ($) {
+
+    $(document).on('click', '.emotions li a', function (e) {
+        e.preventDefault();
+
+        var reaction_id = $(this).data('reaction');
+        var story_id = $(this).data('story-id');
+        var btn = $(this);
+
+        $('.emotions li a').removeAttr('style');
+
+        $.ajax({
+            type: 'POST',
+            url: '/like/story',
+            data: {
+                reaction_id: reaction_id,
+                story_id: story_id
+            },
+            success: function (data) {
+                btn.css('color', 'blue');
+            }
+        });
+
+    });
 
     $.ajaxSetup({
         headers: {

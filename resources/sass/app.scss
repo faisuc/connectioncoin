@@ -9,6 +9,8 @@
 
 @import '@fortawesome/fontawesome-free/css/all';
 
+@import '../lib/faceMocion/faceMocion.css';
+
 .card-columns {
     @include media-breakpoint-only(lg) {
         column-count: 4;
@@ -193,4 +195,12 @@ a.custom-card:hover {
 
 ul.list-connection-users li:not(:first-of-type) {
   margin-left: -16px;
+}
+
+.emotions {
+  li {
+    a {
+      font-size: 30px;
+    }
+  }
 }

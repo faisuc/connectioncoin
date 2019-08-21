@@ -39,6 +39,11 @@ class Story extends Model
         return $this->hasMany('App\Comment');
     }
 
+    public function likes()
+    {
+        return $this->hasMany('App\StoryLike');
+    }
+
     public function getTheLastUsersWhoPostedUsingThisCoin($take = 2)
     {
         $coins = $this->withTrashed()->where('coin_id', $this->coin_id)->latest()->take($take)->get();

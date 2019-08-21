@@ -49197,6 +49197,8 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ../lib/faceMocion/faceMocion.js */ "./resources/lib/faceMocion/faceMocion.js");
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
@@ -49219,6 +49221,24 @@ var app = new Vue({
   el: '#app'
 });
 jQuery(document).ready(function ($) {
+  $(document).on('click', '.emotions li a', function (e) {
+    e.preventDefault();
+    var reaction_id = $(this).data('reaction');
+    var story_id = $(this).data('story-id');
+    var btn = $(this);
+    $('.emotions li a').removeAttr('style');
+    $.ajax({
+      type: 'POST',
+      url: '/like/story',
+      data: {
+        reaction_id: reaction_id,
+        story_id: story_id
+      },
+      success: function success(data) {
+        btn.css('color', 'blue');
+      }
+    });
+  });
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -49536,6 +49556,113 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/lib/faceMocion/faceMocion.js":
+/*!************************************************!*\
+  !*** ./resources/lib/faceMocion/faceMocion.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$.fn.extend({
+  faceMocion: function faceMocion(opciones) {
+    var faceMocion = this;
+    var NombreSelector = "Selector";
+    var DescripcionFace = "--";
+    defaults = {
+      emociones: [{
+        "emocion": "amo",
+        "TextoEmocion": "Lo amo"
+      }, {
+        "emocion": "molesto",
+        "TextoEmocion": "Me molesta"
+      }, {
+        "emocion": "asusta",
+        "TextoEmocion": "Me asusta"
+      }, {
+        "emocion": "divierte",
+        "TextoEmocion": "Me divierte"
+      }, {
+        "emocion": "gusta",
+        "TextoEmocion": "Me gusta"
+      }, {
+        "emocion": "triste",
+        "TextoEmocion": "Me entristece"
+      }, {
+        "emocion": "asombro",
+        "TextoEmocion": "Me asombra"
+      }, {
+        "emocion": "alegre",
+        "TextoEmocion": "Me alegra"
+      }]
+    };
+    var opciones = $.extend({}, defaults, opciones);
+    $(faceMocion).each(function (index) {
+      var UnicoID = Date.now();
+      $(this).attr("class", $(faceMocion).attr("class") + " " + UnicoID);
+      var EstadoInicial = "alegre";
+
+      if ($(this).val() != "") {
+        EstadoInicial = $(this).val();
+      } else {
+        $(this).val('alegre');
+      }
+
+      DescripcionFace = EstadoInicial;
+      ElementoIniciar = '';
+      ElementoIniciar = ElementoIniciar + '<div dato-descripcion="' + DescripcionFace + '" ';
+      ElementoIniciar = ElementoIniciar + 'id-referencia="' + UnicoID;
+      ElementoIniciar = ElementoIniciar + '"  class="' + NombreSelector;
+      ElementoIniciar = ElementoIniciar + ' selectorFace ' + EstadoInicial + '"></div>';
+      $(this).before(ElementoIniciar);
+    });
+    $(document).ready(function () {
+      BarraEmociones = '<div class="faceMocion">';
+      $.each(opciones.emociones, function (index, emo) {
+        BarraEmociones = BarraEmociones + '<div dato-descripcion="' + emo.TextoEmocion;
+        BarraEmociones = BarraEmociones + '" class="' + emo.emocion + '"></div>';
+      });
+      BarraEmociones = BarraEmociones + '</div>';
+      $(document.body).append(BarraEmociones);
+      $('.faceMocion div').hover(function () {
+        var title = $(this).attr('dato-descripcion');
+        $(this).data('tipText', title).removeAttr('dato-descripcion');
+        $('<p class="MensajeTexto"></p>').text(title).appendTo('body').fadeIn('slow');
+      }, function () {
+        $(this).attr('dato-descripcion', $(this).data('tipText'));
+        $('.MensajeTexto').remove();
+      }).mousemove(function (e) {
+        var RatonX = e.pageX - 20;
+        var RatonY = e.pageY - 60;
+        $('.MensajeTexto').css({
+          top: RatonY,
+          left: RatonX
+        });
+      });
+    });
+    $('.' + NombreSelector).hover(function (e) {
+      SelectorEmocion = $(this);
+      var RatonX = e.pageX - 20;
+      var RatonY = e.pageY - 60;
+      $(".faceMocion").css({
+        top: RatonY,
+        left: RatonX
+      });
+      $(".faceMocion").show();
+      $(".faceMocion div").click(function () {
+        SelectorEmocion.attr("class", NombreSelector + " selectorFace  " + $(this).attr('class'));
+        ElInputSeleccionado = SelectorEmocion.attr("id-referencia");
+        $("." + ElInputSeleccionado).val($(this).attr('class'));
+      });
+    });
+    $(document).mouseup(function (e) {
+      $(".faceMocion").hide();
+    });
+    $(faceMocion).hide();
+  }
+});
 
 /***/ }),
 

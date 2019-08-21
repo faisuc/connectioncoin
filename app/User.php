@@ -48,6 +48,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Story');
     }
 
+    public function likes()
+    {
+        return $this->belongsTo('App\StoryLike');
+    }
+
+    public function likedTheStory($story_id)
+    {
+        $like = StoryLike::where('user_id', $this->id)->where('story_id', $story_id)->first();
+
+        return $like;
+    }
+
     public function messages()
     {
         return $this->hasMany('App\Message', 'id', 'from_user_id')->groupBy('to_user_id');
