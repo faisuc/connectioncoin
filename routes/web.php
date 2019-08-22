@@ -69,6 +69,8 @@ Route::get('users/{user}', 'UserController@show')->name('users.show');
 
 Route::get('test', function () {
 
+    return view('layouts.auth');
+
     dd(getEmotions());
     foreach (Story::find(17)->likes as $like) {
         echo $like->reaction_id;

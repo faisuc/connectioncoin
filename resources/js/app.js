@@ -5,7 +5,6 @@
  */
 
 require('./bootstrap');
-require('../lib/faceMocion/faceMocion.js');
 
 window.Vue = require('vue');
 
