@@ -4,7 +4,7 @@
 <form method="POST" action="{{ route('users.update', ['user' => $user]) }}" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
                 @include('users.partials.sidebar')
