@@ -5,12 +5,12 @@
     @method('PATCH')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12 col-sm-12 col-lg-8">
                 @include('users.partials.sidebar')
             </div>
         </div>
         <div class="row justify-content-center mt-5">
-            <div class="col-md-8">
+            <div class="col-md-12 col-sm-12 col-lg-8">
                 <div class="card">
                     <div class="card-header">Profile</div>
 
