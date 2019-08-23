@@ -4,11 +4,13 @@
 <form method="POST" action="{{ route('users.update', ['user' => $user]) }}" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
                 @include('users.partials.sidebar')
             </div>
+        </div>
+        <div class="row justify-content-center mt-5">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Edit Profile</div>
