@@ -18,8 +18,12 @@
                         @sharedAlerts
 
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <h3>{{ $user->name }}</h3>
+                            <label for="first_name">First Name</label>
+                            <h3>{{ $user->first_name }}</h3>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <h3>{{ $user->last_name }}</h3>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>

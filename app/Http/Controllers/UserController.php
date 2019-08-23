@@ -84,7 +84,8 @@ class UserController extends Controller
     {
 
         $this->validate($request, [
-            'name' => 'required|min:3',
+            'first_name' => 'required|min:3',
+            'last_name' => 'required|min:3',
             'email' => 'required|unique:users,email,' . $user->id,
             'photo' => 'nullable|image',
             'password' => 'nullable|min:6|confirmed',
@@ -118,9 +119,11 @@ class UserController extends Controller
         $user = User::find($user->id);
         $user->email_verified_at = $inputs['email_verified_at'];
         $user->photo = $inputs['photo'];
-        $user->name = $inputs['name'];
+        $user->first_name = $inputs['first_name'];
+        $user->last_name = $inputs['last_name'];
         $user->email = $inputs['email'];
         $user->password = $inputs['password'];
+        $user->bio = $inputs['bio'];
         $user->save();
 
         $verifyEmail ? $user->sendEmailVerificationNotification() : '';

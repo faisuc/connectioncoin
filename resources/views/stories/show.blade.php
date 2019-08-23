@@ -24,7 +24,7 @@
                 <div class="card-footer">
                     <small class="text-muted">Posted 3 days ago</small>
                     <small class="text-muted float-right">Posted by:
-                        <a href="{{ route('users.show', ['user' => $story->user]) }}"><img src="{{ $story->user->thePhoto }}" title="{{ $story->user->name }}" class="img-thumbnail rounded-circle" style="width: 30px; height: 30px;"></a></small>
+                        <a href="{{ route('users.show', ['user' => $story->user]) }}"><img src="{{ $story->user->thePhoto }}" title="{{ $story->user->getFullName() }}" class="img-thumbnail rounded-circle" style="width: 30px; height: 30px;"></a></small>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                     <div class="card border-primary mb-3">
                         <div class="card-body text-primary">
                             <p class="card-text">{!! $comment->text !!}</p>
-                            <small>{{ $comment->user->name }} - {{ $comment->theCreatedAt }}</small>
+                            <small>{{ $comment->user->getFullName() }} - {{ $comment->theCreatedAt }}</small>
                         </div>
                     </div>
                 @endforeach

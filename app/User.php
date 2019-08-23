@@ -20,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'photo'
+        'first_name', 'last_name', 'bio', 'email', 'password', 'photo'
     ];
 
     /**
@@ -79,6 +79,11 @@ class User extends Authenticatable implements MustVerifyEmail
             return 'http://fleischmen.com/wp-content/uploads/2017/11/user-avatar-placeholder.png';
         }
 
+    }
+
+    public function getFullName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
 }

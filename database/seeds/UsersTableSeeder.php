@@ -29,7 +29,8 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->truncate();
 
         $user = new User;
-        $user->name = 'Neil Carlo Sucuangco';
+        $user->first_name = 'Neil Carlo';
+        $user->last_name = 'Sucuangco';
         $user->email = 'succute@yahoo.com';
         $user->password = bcrypt('password');
         $user->email_verified_at = now();

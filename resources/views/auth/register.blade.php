@@ -13,8 +13,14 @@
                 @sharedAlerts
 
                 <div class="wrap-input100 validate-input m-b-23">
-                    <span class="label-input100">Name</span>
-                    <input class="input100 @error('name') is-invalid @enderror" type="text" name="name" placeholder="Type your name" value="{{ old('name') }}" required autocomplete="false" autofocus>
+                    <span class="label-input100">First Name</span>
+                    <input class="input100 @error('first_name') is-invalid @enderror" type="text" name="first_name" placeholder="Type your first name" value="{{ old('first_name') }}" required autocomplete="false" autofocus>
+                    <span class="focus-input100" data-symbol="&#xf206;"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-23">
+                    <span class="label-input100">Last Name</span>
+                    <input class="input100 @error('last_name') is-invalid @enderror" type="text" name="last_name" placeholder="Type your last name" value="{{ old('last_name') }}" required autocomplete="false" autofocus>
                     <span class="focus-input100" data-symbol="&#xf206;"></span>
                 </div>
 

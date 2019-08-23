@@ -19,8 +19,16 @@
                         @sharedAlerts
 
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control form-control-lg" name="name" id="name" placeholder="Enter name" value="{{ $user->name }}">
+                            <label for="first_name">First Name</label>
+                            <input type="text" class="form-control form-control-lg" name="first_name" id="first_name" placeholder="Enter first name" value="{{ $user->first_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" class="form-control form-control-lg" name="last_name" id="last_name" placeholder="Enter last name" value="{{ $user->last_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="bio">Bio</label>
+                            <textarea class="form-control form-control-lg" name="bio" id="bio" placeholder="Enter bio">{{ $user->bio }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
