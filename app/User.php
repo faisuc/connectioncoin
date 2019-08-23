@@ -50,7 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function likes()
     {
-        return $this->belongsTo('App\StoryLike');
+        return $this->hasMany('App\StoryLike');
     }
 
     public function likedTheStory($story_id)
