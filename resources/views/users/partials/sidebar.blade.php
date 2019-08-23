@@ -7,6 +7,14 @@
     <a href="{{ route('users.stories.index', ['user' => $user]) }}" class="list-group-item list-group-item-action {{ \Route::current()->getName() == 'users.stories.index' ? 'active' : '' }}">Stories</a>
 </div> --}}
 <div class="card bg-dark text-white">
+    <div class="opacity-me" style="
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: #ffffff;
+    "></div>
     <img class="card-img" src="{{ $user->thePhoto }}" alt="Card image">
     <div class="card-img-overlay text-dark">
         <div class="d-flex align-items-end flex-column bd-highlight mb-3" style="height: 100%; width: 100%;">
@@ -29,17 +37,17 @@
                             <div class="col-12 col-lg-4 text-center">
                                 <h3 class="mb-0">{{ $user->stories()->withTrashed()->select('coin_id')->where('user_id', $user->id)->groupBy('coin_id')->count() }}</h3>
                                 <small>Coins</small>
-                                <a href="{{ route('users.show', ['users' => $user]) }}" class="btn btn-block btn-outline-success mt-3"><i class="fas fa-user-circle"></i> My Profile</a>
+                                <a href="{{ route('users.show', ['users' => $user]) }}" class="btn btn-block btn-outline-success mt-3" style="border-radius: 50px;"><i class="fas fa-user-circle"></i> My Profile</a>
                             </div>
                             <div class="col-12 col-lg-4 text-center">
                                 <h3 class="mb-0">{{ $user->stories()->withTrashed()->count() }}</h3>
                                 <small>Stories</small>
-                                <a href="{{ route('users.coins.index', ['user' => $user]) }}" class="btn btn-block btn-outline-secondary mt-3"><i class="fas fa-coins"></i> Coins</a>
+                                <a href="{{ route('users.coins.index', ['user' => $user]) }}" class="btn btn-block btn-outline-secondary mt-3" style="border-radius: 50px;"><i class="fas fa-coins"></i> Coins</a>
                             </div>
                             <div class="col-12 col-lg-4 text-center">
                                 <h3 class="mb-0">{{ $user->likes()->count() }}</h3>
                                 <small>Likes</small>
-                                <a href="{{ route('users.stories.index', ['user' => $user]) }}" class="btn btn-block btn-outline-primary mt-3"><i class="fas fa-book"></i> Stories</a>
+                                <a href="{{ route('users.stories.index', ['user' => $user]) }}" class="btn btn-block btn-outline-primary mt-3" style="border-radius: 50px;"><i class="fas fa-book"></i> Stories</a>
                             </div>
                             <!--/col-->
                         </div>
