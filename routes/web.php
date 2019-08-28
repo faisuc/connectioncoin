@@ -29,9 +29,13 @@ Auth::routes(['verify' => true]);
 
 // Route::get('/home', 'HomeController@index')->name('home')->middleware(['verified']);
 
+// Route::get('/', function () {
+//     return view('twitter');
+// })->middleware(['web', 'guest']);
+
 Route::get('/', function () {
-    return view('twitter');
-})->middleware(['web', 'guest']);
+    return redirect()->route('stories.index');
+});
 
 Route::middleware(['auth', 'verified', 'role:admin|client'])->group(function () {
 
@@ -71,9 +75,9 @@ Route::get('users/{user}/stories', 'ShowUserStoriesController')->name('users.sto
 
 Route::get('users/{user}', 'UserController@show')->name('users.show');
 
-// Route::get('twitter', function () {
-//     return view('twitter');
-// });
+Route::get('twitter', function () {
+    return view('twitter');
+});
 
 // Route::get('test', function () {
 
