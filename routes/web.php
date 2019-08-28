@@ -75,7 +75,7 @@ Route::get('users/{user}/stories', 'ShowUserStoriesController')->name('users.sto
 
 Route::get('users/{user}', 'UserController@show')->name('users.show');
 
-Route::get('twitter', function () {
+Route::get('testlayout', function () {
     return view('twitter');
 });
 
