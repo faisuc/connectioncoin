@@ -23,11 +23,15 @@ Route::get('stories', function () {
     return redirect()->route('stories.index');
 });
 
-Route::get('/', 'StoryController@index')->name('stories.index');
+Route::get('/home', 'StoryController@index')->name('stories.index');
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware(['verified']);
+// Route::get('/home', 'HomeController@index')->name('home')->middleware(['verified']);
+
+Route::get('/', function () {
+    return view('twitter');
+})->middleware(['web', 'guest']);
 
 Route::middleware(['auth', 'verified', 'role:admin|client'])->group(function () {
 
@@ -67,47 +71,51 @@ Route::get('users/{user}/stories', 'ShowUserStoriesController')->name('users.sto
 
 Route::get('users/{user}', 'UserController@show')->name('users.show');
 
-Route::get('test', function () {
+// Route::get('twitter', function () {
+//     return view('twitter');
+// });
 
-    return view('layouts.auth');
+// Route::get('test', function () {
 
-    dd(getEmotions());
-    foreach (Story::find(17)->likes as $like) {
-        echo $like->reaction_id;
-    }
+//     return view('layouts.auth');
 
-    exit;
+//     dd(getEmotions());
+//     foreach (Story::find(17)->likes as $like) {
+//         echo $like->reaction_id;
+//     }
 
-    $messages = Auth::user()->messages();
+//     exit;
 
-    foreach ($messages as $message) {
-        echo $message->text . '<br />';
-    }
+//     $messages = Auth::user()->messages();
 
-    exit;
+//     foreach ($messages as $message) {
+//         echo $message->text . '<br />';
+//     }
 
-    $file = 'D:/PROJECTS/HOMESTEAD/madhatmedia/connectioncoin/storage/app/public/story/images/14QbybvgZebaHG7cnynsX77NmHanl8wnODvhb4mM.jpeg';
-    $file = pathinfo($file, PATHINFO_FILENAME);
+//     exit;
 
-    dd($file);
+//     $file = 'D:/PROJECTS/HOMESTEAD/madhatmedia/connectioncoin/storage/app/public/story/images/14QbybvgZebaHG7cnynsX77NmHanl8wnODvhb4mM.jpeg';
+//     $file = pathinfo($file, PATHINFO_FILENAME);
 
-    dd(public_path());
-    $storagePath = Storage::getDriver()->getAdapter()->getPathPrefix();
+//     dd($file);
 
-    dd($storagePath);
+//     dd(public_path());
+//     $storagePath = Storage::getDriver()->getAdapter()->getPathPrefix();
 
-    \DB::enableQueryLog();
+//     dd($storagePath);
 
-    $story = new Story;
-    $story->find(11)->getTheLastUsersWhoPostedUsingThisCoin(10);
+//     \DB::enableQueryLog();
 
-    dd(\DB::getQueryLog());
+//     $story = new Story;
+//     $story->find(11)->getTheLastUsersWhoPostedUsingThisCoin(10);
 
-    $contacts = User::where('id', '<>', auth()->id())->get();
+//     dd(\DB::getQueryLog());
 
-    // getMessagesFor($id)
-    // $messages = Message::where('from', $id)->orWhere('to', $id)->get();
+//     $contacts = User::where('id', '<>', auth()->id())->get();
 
-    exit;
+//     // getMessagesFor($id)
+//     // $messages = Message::where('from', $id)->orWhere('to', $id)->get();
 
-});
+//     exit;
+
+// });
