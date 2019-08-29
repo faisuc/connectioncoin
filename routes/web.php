@@ -34,7 +34,7 @@ Auth::routes(['verify' => true]);
 // })->middleware(['web', 'guest']);
 
 Route::get('/', function () {
-    return redirect()->route('stories.index');
+    return view('index');
 });
 
 Route::middleware(['auth', 'verified', 'role:admin|client'])->group(function () {
