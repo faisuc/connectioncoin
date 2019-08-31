@@ -8,6 +8,8 @@ use App\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client as GuzzleClient;
 
 class RegisterController extends Controller
 {
@@ -75,6 +77,14 @@ class RegisterController extends Controller
         $clientRole = Role::findByName('client');
 
         $user->assignRole($clientRole);
+
+        $guzzleClient = new GuzzleClient;
+        $response = $guzzleClient->post('http://store.connectioncoin.com/wp-json/connectioncoin/v1/store/user', [
+            'form_params' => [
+                'email' => $data['email'],
+                'password' => $data['password']
+            ]
+        ]);
 
         return $user;
     }
