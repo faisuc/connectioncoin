@@ -52,6 +52,16 @@
                         @else
 
                             <li class="nav-item">
+                                <a href="#" class="nav-link" onclick="event.preventDefault();
+                                document.getElementById('wordpress-store-form').submit();">
+                                    Store
+                                </a>
+                                <form action="{{ route('wordpress_store.store') }}" method="POST" id="wordpress-store-form">
+                                    @csrf
+                                </form>
+                            </li>
+
+                            <li class="nav-item">
                                 <a href="{{ route('connections.create') }}" class="nav-link">
                                     Create Connection
                                 </a>
