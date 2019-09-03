@@ -16761,3 +16761,17 @@ textarea:focus {
   outline: none !important;
 }
 
+.btn.btn-primary.btn-lg,
+.btn-group-lg > .btn.btn-primary {
+  width: 100%;
+  display: block;
+}
+
+.card {
+  border-radius: 10px !important;
+}
+
+.card > a > img {
+  border-radius: 10px !important;
+}
+
