@@ -16743,7 +16743,7 @@ ul.list-connection-users li:not(:first-of-type) {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-image: url(/images/bg-01.jpg?c92b2d76212ef19bf8d55bb96e73c0f9);
+  background-color: #4287f5 !important;
   background-attachment: fixed;
 }
 
