@@ -26,7 +26,6 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     <img src="{{ asset('images/connectioncoin_logo.png') }}" class="img-responsive mr-2 logo">
-                    {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

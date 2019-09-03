@@ -16492,7 +16492,7 @@ readers do not read off random characters that represent icons */
 }
 
 .navbar {
-  background-color: #B057F6 !important;
+  background-color: #4287f5 !important;
 }
 
 .navbar .nav-item.dropdown .dropdown-menu a {
@@ -16735,7 +16735,7 @@ ul.list-connection-users li:not(:first-of-type) {
 }
 
 .logo {
-  width: 50px;
+  width: 120px;
 }
 
 .container-profile100 {
@@ -16765,6 +16765,8 @@ textarea:focus {
 .btn-group-lg > .btn.btn-primary {
   width: 100%;
   display: block;
+  background-color: #4287f5;
+  border-radius: 25px;
 }
 
 .card {
@@ -16773,5 +16775,9 @@ textarea:focus {
 
 .card > a > img {
   border-radius: 10px !important;
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0 !important;
 }
 

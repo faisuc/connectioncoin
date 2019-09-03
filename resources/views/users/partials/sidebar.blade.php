@@ -15,6 +15,7 @@
         opacity: 0.3;
         background: #ffffff;
         border: none;
+        border-radius: 2%;
     "></div>
     <img class="card-img" src="{{ $user->thePhoto }}" alt="Card image" style="border-radius: 2%;">
     <div class="card-img-overlay text-dark">
