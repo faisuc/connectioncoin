@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid py-4">
     @sharedAlerts
     <div class="messaging">
         <div class="inbox_msg">

@@ -4,14 +4,14 @@
 <form method="POST" action="{{ route('users.update', ['user' => $user]) }}" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
-    <div class="container">
+    <div class="container-fluid container-profile100 py-4">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-5">
                 @include('users.partials.sidebar')
             </div>
         </div>
         <div class="row justify-content-center mt-5">
-            <div class="col-md-8">
+            <div class="col-md-5">
                 <div class="card">
                     <div class="card-header">Edit Profile</div>
 
@@ -20,7 +20,7 @@
 
                         <div class="form-group">
                             <label for="first_name">First Name</label>
-                            <input type="text" class="form-control form-control-lg" name="first_name" id="first_name" placeholder="Enter first name" value="{{ $user->first_name }}">
+                            <input type="text" class="form-control form-control-lg input100" name="first_name" id="first_name" placeholder="Enter first name" value="{{ $user->first_name }}">
                         </div>
                         <div class="form-group">
                             <label for="last_name">Last Name</label>

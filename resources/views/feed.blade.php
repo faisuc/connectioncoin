@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid py-4 container-profile100">
     @sharedAlerts
     @foreach ($stories as $story)
     <div class="row justify-content-center">
-        <div class="col-md-4 py-2">
+        <div class="col-md-12 col-lg-6 py-2 col-sm-12">
             <a href="{{ route('stories.show', ['story' => $story->id]) }}" class="custom-card">
                 <div class="card h-100 shadow">
                     <img src="{{ $story->theImage }}" class="card-img-top" alt="{{ $story->title }}">
