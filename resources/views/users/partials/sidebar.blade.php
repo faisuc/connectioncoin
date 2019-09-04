@@ -14,7 +14,7 @@
         height: 100%;
         opacity: 0.3;
         background: rgb(9,0,162);
-        background: linear-gradient(0deg, rgba(9,0,162,1) 0%, rgba(0,0,255,1) 37%, rgba(0,212,255,0) 71%);
+        background: linear-gradient(0deg, rgba(9,0,162,1) 16%, rgba(0,0,255,1) 37%, rgba(0,212,255,0) 90%);
         border: none;
         border-radius: 2%;
     "></div>
