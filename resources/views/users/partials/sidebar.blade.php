@@ -14,7 +14,7 @@
         height: 100%;
         opacity: 0.3;
         background: rgb(9,0,162);
-        background: linear-gradient(90deg, rgba(9,0,162,1) 0%, rgba(0,0,255,1) 45%, rgba(0,212,255,0) 100%);
+        background: linear-gradient(0deg, rgba(9,0,162,1) 0%, rgba(0,0,255,1) 37%, rgba(0,212,255,0) 71%);
         border: none;
         border-radius: 2%;
     "></div>
@@ -31,7 +31,7 @@
                 @endcan
                 @auth
                     @can('message-user', $user)
-                        <a href="{{ route('messages.index', ['user' => $user]) }}" class="btn btn-secondary btn-lg mb-2"><i class="fas fa-paper-plane"></i> Message</a>
+                        <a href="{{ route('messages.index', ['user' => $user]) }}" class="btn btn-secondary btn-lg mb-2 btn-block"><i class="fas fa-paper-plane"></i> Message</a>
                     @endcan
                 @endauth
                 <div class="card d-none d-sm-block" style="border-radius: 1.25rem;">
