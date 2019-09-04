@@ -13,8 +13,8 @@
         width: 100%;
         height: 100%;
         opacity: 0.3;
-        background: rgb(2,0,36);
-        background: linear-gradient(5deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.577468487394958) 38%, rgba(0,212,255,1) 100%);
+        background: rgb(9,0,162);
+        background: linear-gradient(90deg, rgba(9,0,162,1) 0%, rgba(0,0,255,1) 45%, rgba(0,212,255,0) 100%);
         border: none;
         border-radius: 2%;
     "></div>
