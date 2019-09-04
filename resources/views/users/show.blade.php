@@ -9,6 +9,7 @@
                 @include('users.partials.sidebar')
             </div>
         </div>
+        <!--
         <div class="row justify-content-center mt-5">
             <div class="col-md-5 col-sm-5 col-lg-5">
                 <div class="card">
@@ -41,5 +42,6 @@
                 </div>
             </div>
         </div>
+    -->
     </div>
 @endsection

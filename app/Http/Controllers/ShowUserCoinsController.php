@@ -17,6 +17,8 @@ class ShowUserCoinsController extends Controller
     {
         $this->views['user'] = $user = User::findOrFail($user_id);
 
+        $this->authorize('update', $user);
+
         $this->views['stories'] = $user->stories()->withTrashed()->select('coin_id')->where('user_id', $user->id)->groupBy('coin_id')->get();
 
         return view('users.coins.index', $this->views);
