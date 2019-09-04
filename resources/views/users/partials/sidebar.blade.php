@@ -13,11 +13,7 @@
         width: 100%;
         height: 100%;
         opacity: 0.3;
-        background: rgb(9,0,162);
-        background: -moz-linear-gradient(0deg, rgba(9,0,162,1) 29%, rgba(0,0,255,1) 52%, rgba(0,212,255,0) 90%);
-        background: -webkit-linear-gradient(0deg, rgba(9,0,162,1) 29%, rgba(0,0,255,1) 52%, rgba(0,212,255,0) 90%);
-        background: linear-gradient(0deg, rgba(9,0,162,1) 29%, rgba(0,0,255,1) 52%, rgba(0,212,255,0) 90%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0900a2',endColorstr='#00d4ff',GradientType=1);
+        background: linear-gradient(0deg, rgb(9, 0, 162) 29%, rgb(0, 0, 255) 72%, rgba(0, 212, 255, 0) 90%);
         border: none;
         border-radius: 2%;
     "></div>
