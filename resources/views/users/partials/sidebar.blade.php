@@ -25,14 +25,6 @@
                 @if ( ! is_null($user->bio))
                     <h3 class="mb-3 text-white">{{ $user->bio }}</h3>
                 @endif
-                @can('update', $user)
-                    <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-primary btn-lg mb-2">Edit Profile</a>
-                @endcan
-                @auth
-                    @can('message-user', $user)
-                        <a href="{{ route('messages.index', ['user' => $user]) }}" class="btn btn-secondary btn-lg mb-2 btn-block"><i class="fas fa-paper-plane"></i> Message</a>
-                    @endcan
-                @endauth
                 <div class="card d-none d-sm-block" style="border-radius: 1.25rem;">
                     <div class="card-body">
                         {{-- <div class="row">
@@ -51,7 +43,12 @@
                             <div class="col-12 col-lg-4 text-center">
                                 <h3 class="mb-0">{{ $user->stories()->withTrashed()->select('coin_id')->where('user_id', $user->id)->groupBy('coin_id')->count() }}</h3>
                                 <small>Coins Given</small>
-                                <a href="{{ route('users.show', ['users' => auth()->user()]) }}" class="btn btn-block btn-outline-success mt-3" style="border-radius: 50px;"><i class="fas fa-user-circle"></i> My Profile</a>
+                                @can('update', $user)
+                                    <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-block btn-outline-success mt-3" style="border-radius: 50px;"><i class="fas fa-user-circle"></i> Edit Profile</a>
+                                @endcan
+                                @can('message-user', $user)
+                                    <a href="{{ route('messages.index', ['user' => $user]) }}" class="btn btn-block btn-outline-success mt-3" style="border-radius: 50px;"><i class="fas fa-paper-plane"></i> Message</a>
+                                @endcan
                             </div>
                             <div class="col-12 col-lg-4 text-center">
                                 <h3 class="mb-0">{{ $user->stories()->withTrashed()->count() }}</h3>
