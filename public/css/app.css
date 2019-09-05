@@ -16492,7 +16492,7 @@ readers do not read off random characters that represent icons */
 }
 
 .navbar {
-  background-color: #4287f5 !important;
+  background-color: #0085ad !important;
 }
 
 .navbar .nav-item.dropdown .dropdown-menu a {
@@ -16500,7 +16500,7 @@ readers do not read off random characters that represent icons */
 }
 
 .card-header {
-  background-color: #4287f5 !important;
+  background-color: #0085ad !important;
   color: #ffffff !important;
 }
 
@@ -16743,7 +16743,7 @@ ul.list-connection-users li:not(:first-of-type) {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-color: #4287f5 !important;
+  background-color: #0085ad !important;
   background-attachment: fixed;
 }
 
@@ -16765,7 +16765,7 @@ textarea:focus {
 .btn-group-lg > .btn.btn-primary {
   width: 100%;
   display: block;
-  background-color: #4287f5;
+  background-color: #0085ad;
   border-radius: 25px;
 }
 

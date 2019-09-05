@@ -53,7 +53,9 @@
                             <div class="col-12 col-lg-4 text-center">
                                 <h3 class="mb-0">{{ $user->stories()->withTrashed()->count() }}</h3>
                                 <small>Connections Made</small>
-                                <a href="{{ route('users.coins.index', ['user' => $user]) }}" class="btn btn-block btn-outline-secondary mt-3" style="border-radius: 50px;"><i class="fas fa-coins"></i> Coins</a>
+                                @can('update', $user)
+                                    <a href="{{ route('users.coins.index', ['user' => $user]) }}" class="btn btn-block btn-outline-secondary mt-3" style="border-radius: 50px;"><i class="fas fa-coins"></i> Coins</a>
+                                @endcan
                             </div>
                             <div class="col-12 col-lg-4 text-center">
                                 <h3 class="mb-0">{{ $user->likes()->count() }}</h3>
