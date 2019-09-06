@@ -64,7 +64,7 @@
             <img src="{{ asset('images/connectioncoin_logo.png') }}" class="img-responsive" width="100%" />
             <div class="StaticLoggedOutHomePage-delightHeader">
               A global community of individuals who believe that connecting with others changes everything.
-              <iframe src="https://player.vimeo.com/video/358317165" width="100%" height="480" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+              <iframe src="https://player.vimeo.com/video/358317165" width="100%" height="280px" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
             </div>
         </div>
       </div>
