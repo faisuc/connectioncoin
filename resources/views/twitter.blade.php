@@ -47,7 +47,7 @@
             <div class="StaticLoggedOutHomePage-noSignupForm">
               <h2 class="StaticLoggedOutHomePage-signupSubtitle">Join Connection Coin today.</h2>
               <div class="StaticLoggedOutHomePage-buttons">
-                <a class="js-nav EdgeButton EdgeButton--medium EdgeButton--primary StaticLoggedOutHomePage-buttonSignup" href="{{ route('register') }}" style="color: #0085ad !important;">
+                <a class="js-nav EdgeButton EdgeButton--medium EdgeButton--primary StaticLoggedOutHomePage-buttonSignup" href="{{ route('register') }}" style="background-color: #0085ad !important;">
                   Sign up
                 </a>
                 <a class="js-nav EdgeButton EdgeButton--medium EdgeButton--secondary StaticLoggedOutHomePage-buttonLogin" href="{{ route('login') }}">
