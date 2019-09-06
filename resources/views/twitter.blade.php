@@ -47,7 +47,7 @@
             <div class="StaticLoggedOutHomePage-noSignupForm">
               <h2 class="StaticLoggedOutHomePage-signupSubtitle">Join Connection Coin today.</h2>
               <div class="StaticLoggedOutHomePage-buttons">
-                <a class="js-nav EdgeButton EdgeButton--medium EdgeButton--primary StaticLoggedOutHomePage-buttonSignup" href="{{ route('register') }}">
+                <a class="js-nav EdgeButton EdgeButton--medium EdgeButton--primary StaticLoggedOutHomePage-buttonSignup" href="{{ route('register') }}" style="color: #0085ad !important;">
                   Sign up
                 </a>
                 <a class="js-nav EdgeButton EdgeButton--medium EdgeButton--secondary StaticLoggedOutHomePage-buttonLogin" href="{{ route('login') }}">
@@ -58,35 +58,13 @@
         </div>
       </div>
   
-      <div class="StaticLoggedOutHomePage-cell StaticLoggedOutHomePage-communicationBlock" style="background-color: #4287f5;">
+      <div class="StaticLoggedOutHomePage-cell StaticLoggedOutHomePage-communicationBlock" style="background-color: #0085ad !important;">
 
         <div class="StaticLoggedOutHomePage-communicationContent">
+            <img src="{{ asset('images/connectioncoin_logo.png') }}" class="img-responsive" width="100%" />
             <div class="StaticLoggedOutHomePage-delightHeader">
-              You’re one step away from the shiny new Connectioncoin.com
-            </div>
-            <div class="StaticLoggedOutHomePage-delightSubheader">
-              We’ve added tons of cool features, including …
-            </div>
-            <div class="StaticLoggedOutHomePage-delightItem">
-              {{-- <span class="Icon Icon--discover"></span> --}}
-              <div>
-                <div class="StaticLoggedOutHomePage-delightItemTitle">Explore</div>
-                <div class="StaticLoggedOutHomePage-delightItemText">Get the latest Tweets, news, and videos in one place.</div>
-              </div>
-            </div>
-            <div class="StaticLoggedOutHomePage-delightItem">
-              {{-- <span class="Icon Icon--bookmark"></span> --}}
-              <div>
-                <div class="StaticLoggedOutHomePage-delightItemTitle">Bookmarks</div>
-                <div class="StaticLoggedOutHomePage-delightItemText">Save that interesting Tweet for later.</div>
-              </div>
-            </div>
-            <div class="StaticLoggedOutHomePage-delightItem">
-              {{-- <span class="Icon Icon--paintbrush"></span> --}}
-              <div>
-                <div class="StaticLoggedOutHomePage-delightItemTitle">Personalize</div>
-                <div class="StaticLoggedOutHomePage-delightItemText">Choose from new themes and more dark mode options.</div>
-              </div>
+              A global community of individuals who believe that connecting with others changes everything.
+              <iframe src="https://player.vimeo.com/video/358317165" width="100%" height="480" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
             </div>
         </div>
       </div>
