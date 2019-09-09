@@ -50,7 +50,7 @@
                 <a class="js-nav EdgeButton EdgeButton--medium EdgeButton--primary StaticLoggedOutHomePage-buttonSignup" href="{{ route('register') }}" style="background-color: #0085ad !important;">
                   Sign up
                 </a>
-                <a class="js-nav EdgeButton EdgeButton--medium EdgeButton--secondary StaticLoggedOutHomePage-buttonLogin" href="{{ route('login') }}">
+                <a class="js-nav EdgeButton EdgeButton--medium EdgeButton--secondary StaticLoggedOutHomePage-buttonLogin" href="{{ route('login') }}" style="color: #0085ad; border-color: #0085ad;">
                   Log in
                 </a>
               </div>
