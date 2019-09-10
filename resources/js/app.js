@@ -328,4 +328,17 @@ jQuery(document).ready(function ($) {
 
     }
 
+    $('.messaging .write_msg').keyup(function (e) {
+        if (e.keyCode == 13 && !e.shiftKey)
+        {
+            e.preventDefault();
+        }
+
+        if ($(this).outerHeight() < 300) {
+            while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
+                $(this).height($(this).height()+1);
+            };
+        }
+    });
+
 });

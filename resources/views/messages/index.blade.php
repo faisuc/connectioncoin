@@ -40,7 +40,7 @@
                 </div>
                 <div class="type_msg">
                     <div class="input_msg_write">
-                    <input type="text" class="write_msg" placeholder="Type a message" />
+                    <textarea class="write_msg" placeholder="Type a message"></textarea>
                     <button class="msg_send_btn" type="button">
                         <i class="fas fa-paper-plane"></i>
                     </button>

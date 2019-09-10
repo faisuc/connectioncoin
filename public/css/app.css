@@ -16726,6 +16726,16 @@ img {
   overflow-y: auto;
 }
 
+.messaging .write_msg {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.messaging .input_msg_write {
+  position: relative;
+}
+
 ul.list-connection-users li:not(:first-of-type) {
   margin-left: -16px;
 }
