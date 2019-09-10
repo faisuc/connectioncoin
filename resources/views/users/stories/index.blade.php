@@ -24,6 +24,7 @@
                                         <div class="card-header text-center">{{ $story->title }}</div>
                                         <div class="card-body text-secondary">
                                             <h5 class="card-title text-center">{!! $story->theDescription !!}</h5>
+                                            <a href="{{ route('stories.show', ['story' => $story]) }}" class="stretched-link"></a>
                                         </div>
                                     </div>
                                 </div>

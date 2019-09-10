@@ -16,14 +16,14 @@ class WordPressStoreController extends Controller
         $email = auth()->user()->email;
 
         $guzzleClient = new GuzzleClient;
-        $response = $guzzleClient->post('http://store.connectioncoin.com/wp-json/connectioncoin/v1/store/user/key', [
+        $response = $guzzleClient->post('https://store.connectioncoin.com/wp-json/connectioncoin/v1/store/user/key', [
             'form_params' => [
                 'email' => $email,
                 'key' => $key
             ]
         ]);
 
-        return redirect()->to('http://store.connectioncoin.com/?key=' . $key . '&email=' . $email);
+        return redirect()->to('https://store.connectioncoin.com/?key=' . $key . '&email=' . $email);
 
     }
 
