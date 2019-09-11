@@ -25,7 +25,7 @@
                 @if ( ! is_null($user->bio))
                     <h3 class="mb-3 text-white">{{ $user->bio }}</h3>
                 @endif
-                @if ($user->socialmedialinks->exists())
+                @if ($user->socialmedialinks)
                     <ul class="list-group list-group-horizontal mb-2">
                         @if ($user->socialmedialinks->facebook)
                             <li class="list-group-item">

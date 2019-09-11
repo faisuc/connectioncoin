@@ -42,19 +42,19 @@
                         </div>
                         <div class="form-group">
                             <label for="facebook">Facebook</label>
-                            <input type="text" class="form-control form-control-lg" name="facebook" id="facebook" placeholder="Enter facebook url" value="{{ $user->socialmedialinks->facebook }}">
+                            <input type="text" class="form-control form-control-lg" name="facebook" id="facebook" placeholder="Enter facebook url" value="{{ optional($user->socialmedialinks)->facebook }}">
                         </div>
                         <div class="form-group">
                             <label for="twitter">Twitter</label>
-                            <input type="text" class="form-control form-control-lg" name="twitter" id="twitter" placeholder="Enter twitter url" value="{{ $user->socialmedialinks->twitter }}">
+                            <input type="text" class="form-control form-control-lg" name="twitter" id="twitter" placeholder="Enter twitter url" value="{{ optional($user->socialmedialinks)->twitter }}">
                         </div>
                         <div class="form-group">
                             <label for="linkedin">LinkedIn</label>
-                            <input type="text" class="form-control form-control-lg" name="linkedin" id="linkedin" placeholder="Enter linkedin url" value="{{ $user->socialmedialinks->linkedin }}">
+                            <input type="text" class="form-control form-control-lg" name="linkedin" id="linkedin" placeholder="Enter linkedin url" value="{{ optional($user->socialmedialinks)->linkedin }}">
                         </div>
                         <div class="form-group">
                             <label for="instagram">Instagram</label>
-                            <input type="text" class="form-control form-control-lg" name="instagram" id="instagram" placeholder="Enter instagram url" value="{{ $user->socialmedialinks->instagram }}">
+                            <input type="text" class="form-control form-control-lg" name="instagram" id="instagram" placeholder="Enter instagram url" value="{{ optional($user->socialmedialinks)->instagram }}">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
