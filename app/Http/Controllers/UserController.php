@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\UserSocialMediaLink;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp\Exception\GuzzleException;
@@ -85,7 +86,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $wpData = [];
-    
+
         $this->validate($request, [
             'first_name' => 'required|min:3',
             'last_name' => 'required|min:3',
@@ -144,6 +145,13 @@ class UserController extends Controller
         ]);
 
         $verifyEmail ? $user->sendEmailVerificationNotification() : '';
+
+        if ($user->socialmedialinks->exists()) {
+            $user->socialmedialinks()->update($request->only(['facebook', 'twitter', 'linkedin', 'instagram']));
+        } else {
+            $socialMediaLinks = new UserSocialMediaLink($request->only(['facebook', 'twitter', 'linkedin', 'instagram']));
+            $user->socialmedialinks()->save($socialMediaLinks);
+        }
 
         return redirect()->back()->with('success', 'Profile has been updated.');
 

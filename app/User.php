@@ -43,6 +43,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $appends = ['thePhoto'];
 
+    public function socialmedialinks()
+    {
+        return $this->hasOne(UserSocialMediaLink::class);
+    }
+
     public function stories()
     {
         return $this->hasMany('App\Story');
