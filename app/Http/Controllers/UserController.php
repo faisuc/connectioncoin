@@ -146,7 +146,7 @@ class UserController extends Controller
 
         $verifyEmail ? $user->sendEmailVerificationNotification() : '';
 
-        if ($user->socialmedialinks->exists()) {
+        if ($user->socialmedialinks()->exists()) {
             $user->socialmedialinks()->update($request->only(['facebook', 'twitter', 'linkedin', 'instagram']));
         } else {
             $socialMediaLinks = new UserSocialMediaLink($request->only(['facebook', 'twitter', 'linkedin', 'instagram']));
