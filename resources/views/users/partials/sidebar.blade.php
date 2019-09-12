@@ -21,7 +21,7 @@
     <div class="card-img-overlay text-dark">
         <div class="d-flex align-items-end flex-column bd-highlight mb-3" style="height: 100%; width: 100%;">
             <div class="mt-auto p-2 bd-highlight w-100">
-                <img src="{{ $user->thePhoto }}" style="border-radius: 50%; width: 200px;" class="img-responsive mt-5 mb-3">
+                <img src="{{ $user->thePhoto }}" style="border-radius: 100%; width: 200px; height: 200px;" class="img-responsive mt-5 mb-3">
                 <h1 class="text-white">{{ $user->first_name }}<br />{{ $user->last_name }}</h1>
                 @if ( ! is_null($user->bio))
                     <h3 class="mb-3 text-white">{{ $user->bio }}</h3>
