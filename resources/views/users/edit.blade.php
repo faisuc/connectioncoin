@@ -41,6 +41,11 @@
                             <small id="passwordHelp" class="form-text text-muted">Leave this blank if you don't want to update your profile picture.</small>
                         </div>
                         <div class="form-group">
+                            <label for="coverphoto">Cover Photo</label>
+                            <input type="file" class="form-control form-control-lg" name="coverphoto" accept="image/x-png,image/gif,image/jpeg" />
+                            <small id="passwordHelp" class="form-text text-muted">Leave this blank if you don't want to update your cover photo.</small>
+                        </div>
+                        <div class="form-group">
                             <label for="facebook">Facebook</label>
                             <input type="text" class="form-control form-control-lg" name="facebook" id="facebook" placeholder="Enter facebook url" value="{{ optional($user->socialmedialinks)->facebook }}">
                         </div>

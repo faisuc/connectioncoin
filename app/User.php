@@ -20,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'bio', 'email', 'password', 'photo'
+        'first_name', 'last_name', 'bio', 'email', 'password', 'photo', 'coverphoto'
     ];
 
     /**
@@ -84,6 +84,15 @@ class User extends Authenticatable implements MustVerifyEmail
             return 'http://fleischmen.com/wp-content/uploads/2017/11/user-avatar-placeholder.png';
         }
 
+    }
+
+    public function getTheCoverPhotoAttribute()
+    {
+        if ($this->coverphoto) {
+            return Storage::url($this->coverphoto);
+        } else {
+            return 'http://fleischmen.com/wp-content/uploads/2017/11/user-avatar-placeholder.png';
+        }
     }
 
     public function getFullName()

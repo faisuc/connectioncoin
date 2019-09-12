@@ -6,7 +6,7 @@
     <a href="{{ route('users.coins.index', ['user' => $user]) }}" class="list-group-item list-group-item-action {{ \Route::current()->getName() == 'users.coins.index' ? 'active' : '' }}">Coins</a>
     <a href="{{ route('users.stories.index', ['user' => $user]) }}" class="list-group-item list-group-item-action {{ \Route::current()->getName() == 'users.stories.index' ? 'active' : '' }}">Stories</a>
 </div> --}}
-<div class="card bg-dark text-white border-0" style="border-radius: 2%;">
+<div class="card bg-dark text-white border-0" style="border-radius: 2%; min-height: 700px;">
     <div class="opacity-me" style="
         position: absolute;
         bottom: 0;
@@ -17,10 +17,11 @@
         border: none;
         border-radius: 2%;
     "></div>
-    <img class="card-img" src="{{ $user->thePhoto }}" alt="Card image" style="border-radius: 2%;">
+    <img class="card-img" src="{{ $user->theCoverPhoto }}" alt="Card image" style="border-radius: 2%;">
     <div class="card-img-overlay text-dark">
         <div class="d-flex align-items-end flex-column bd-highlight mb-3" style="height: 100%; width: 100%;">
             <div class="mt-auto p-2 bd-highlight w-100">
+                <img src="{{ $user->thePhoto }}" style="border-radius: 50%; width: 200px;" class="img-responsive mt-5 mb-3">
                 <h1 class="text-white">{{ $user->first_name }}<br />{{ $user->last_name }}</h1>
                 @if ( ! is_null($user->bio))
                     <h3 class="mb-3 text-white">{{ $user->bio }}</h3>

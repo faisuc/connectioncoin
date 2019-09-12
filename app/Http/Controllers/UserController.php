@@ -92,6 +92,7 @@ class UserController extends Controller
             'last_name' => 'required|min:3',
             'email' => 'required|unique:users,email,' . $user->id,
             'photo' => 'nullable|image',
+            'cover' => 'nullable|image',
             'password' => 'nullable|min:6|confirmed',
         ]);
 
@@ -115,6 +116,13 @@ class UserController extends Controller
             $inputs['photo'] = $user->photo;
         }
 
+        if ($request->hasFile('coverphoto')) {
+            $path = Storage::putfile('public/user/coverphoto', $request->file('coverphoto'));
+            $inputs['coverphoto'] = $path;
+        } else {
+            $inputs['coverphoto'] = $user->coverphoto;
+        }
+
         if ($inputs['email'] != $user->email) {
             $inputs['email_verified_at'] = null;
             $verifyEmail = true;
@@ -128,6 +136,7 @@ class UserController extends Controller
         $user = User::find($user->id);
         $user->email_verified_at = $inputs['email_verified_at'];
         $user->photo = $inputs['photo'];
+        $user->coverphoto = $inputs['coverphoto'];
         $user->first_name = $inputs['first_name'];
         $user->last_name = $inputs['last_name'];
         $user->email = $inputs['email'];
