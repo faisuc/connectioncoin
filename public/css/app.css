@@ -16653,7 +16653,7 @@ img {
 }
 
 .time_date {
-  color: #747474;
+  color: #ffffff;
   display: block;
   font-size: 12px;
   margin: 8px 0 0;
@@ -16734,6 +16734,7 @@ img {
 
 .messaging .input_msg_write {
   position: relative;
+  margin-top: 47px;
 }
 
 ul.list-connection-users li:not(:first-of-type) {

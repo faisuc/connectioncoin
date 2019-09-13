@@ -94,6 +94,12 @@ class UserController extends Controller
             'photo' => 'nullable|image',
             'cover' => 'nullable|image',
             'password' => 'nullable|min:6|confirmed',
+            'facebook' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'linkedin' => 'nullable|url',
+            'instagram' => 'nullable|url',
+        ], [
+            '*.url' => 'The :attribute format is invalid. Please make sure it has http/https.'
         ]);
 
         $verifyEmail = false;

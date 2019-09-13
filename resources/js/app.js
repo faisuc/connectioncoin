@@ -305,7 +305,7 @@ jQuery(document).ready(function ($) {
                                             <img src="` + data.thePhoto + `" alt="sunil">
                                         </div>
                                         <div class="chat_ib">
-                                            <h5>` + data.name + `</h5>
+                                            <h5>` + data.first_name + ' ' + data.last_name + `</h5>
                                             <p>i'm good</p>
                                         </div>
                                     </div>
