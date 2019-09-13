@@ -30,22 +30,22 @@
                     <ul class="list-group list-group-horizontal mb-2">
                         @if ($user->socialmedialinks->facebook)
                             <li class="list-group-item">
-                                <a href="{{ $user->socialmedialinks->facebook }}"><i class="fab fa-facebook-f"></i></a>
+                                <a href="{{ $user->socialmedialinks->facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
                             </li>
                         @endif
                         @if ($user->socialmedialinks->twitter)
                             <li class="list-group-item">
-                                <a href="{{ $user->socialmedialinks->twitter }}"><i class="fab fa-twitter"></i></a>
+                                <a href="{{ $user->socialmedialinks->twitter }}" target="_blank"><i class="fab fa-twitter"></i></a>
                             </li>
                         @endif
                         @if ($user->socialmedialinks->linkedin)
                             <li class="list-group-item">
-                                <a href="{{ $user->socialmedialinks->linkedin }}"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="{{ $user->socialmedialinks->linkedin }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                             </li>
                         @endif
                         @if ($user->socialmedialinks->instagram)
                             <li class="list-group-item">
-                                <a href="{{ $user->socialmedialinks->instagram }}"><i class="fab fa-instagram"></i></a>
+                                <a href="{{ $user->socialmedialinks->instagram }}" target="_blank"><i class="fab fa-instagram"></i></a>
                             </li>
                         @endif
                     </ul>
