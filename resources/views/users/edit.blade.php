@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-group">
                             <label for="last_name">Last Name</label>
-                            <input type="text" class="form-control form-control-lg" name="last_name" id="last_name" placeholder="Enter last name" value="{{ $user->last_name }}">
+                            <input type="text" class="form-control form-control-lg" name="last_name" id="last_name" placeholder="Enter last name" value="{{ old('last_name') ?? $user->last_name }}">
                         </div>
                         <div class="form-group">
                             <label for="bio">Bio</label>
