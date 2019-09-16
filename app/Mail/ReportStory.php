@@ -32,6 +32,6 @@ class ReportStory extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail/report-story');
+        return $this->subject('Your Story has been reported!')->markdown('mail/report-story');
     }
 }
