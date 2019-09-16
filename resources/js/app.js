@@ -341,4 +341,29 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    var isSendingReport = false;
+    $(document).on('click', '.send-report-story', function (e) {
+        e.preventDefault();
+        var story_id = $(this).data('story-id');
+        var form = $('#story-report-modal-form-' + story_id);
+        var message = form.find('textarea[name="report_message"]');
+
+        if ($.trim(message.val()) != '' && !isSendingReport) {
+            isSendingReport = true;
+            $.ajax({
+                type: 'POST',
+                url: '/report/story',
+                data: {
+                    message: message.val(),
+                    story_id: story_id
+                },
+                success: function (data) {
+                    alert('Your report has been submitted');
+                    message.val('');
+                    isSendingReport = false;
+                }
+            });
+        }
+    });
+
 });

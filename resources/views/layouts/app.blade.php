@@ -109,6 +109,7 @@
     <script type="text/javascript">
         var APP_URL = {!! json_encode(url('/')) !!}
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     @yield('js')
 </body>

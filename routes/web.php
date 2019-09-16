@@ -64,6 +64,8 @@ Route::middleware(['auth', 'verified', 'role:admin|client'])->group(function () 
 
     Route::post('/wordpress/store', 'WordPressStoreController@store')->name('wordpress_store.store');
 
+    Route::post('/report/story', 'ReportStoryController@store')->name('report.story');
+
 });
 
 Route::middleware(['auth', 'role:admin|client'])->group(function () {

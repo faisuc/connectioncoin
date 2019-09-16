@@ -10,6 +10,7 @@
                     @include('shared.user-connection-lists')
                     <h3 class="card-title">{{ $story->title }}</h3>
                     <p class="card-text">{!! nl2br($story->description) !!}</p>
+                    @include('stories.partials.report', ['story' => $story])
                     @can('update', $story)
                         <a href="{{ route('stories.edit', ['story' => $story]) }}" class="btn btn-secondary">Edit</a>
                     @endcan
