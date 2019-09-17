@@ -29,14 +29,14 @@
                             @endcan
                         </div>
                     </div>
-                    <div class="card-footer">
+                    <!-- div class="card-footer">
                         <small class="text-muted">{{ $story->theFormattedTimeAgo }}</small>
                         <small class="text-muted float-right">Posted by:
                             <a href="{{ route('users.show', ['user' => $story->user]) }}">
                                 <img src="{{ $story->user->thePhoto }}" title="{{ $story->user->getFullName() }}" alt="{{ $story->user->getFullName() }}" class="img-thumbnail rounded-circle" style="width: 30px; height: 30px;">
                             </a>
                         </small>
-                    </div>
+                    </div -->
                 </div>
             </a>
         </div>

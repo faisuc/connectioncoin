@@ -1,0 +1,17 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import '@fortawesome/fontawesome-free/css/all';
+
+@import '../lib/login/fonts/iconic/css/material-design-iconic-font.min.css';
+
+@import '../lib/login/css/util.css';
+
+@import '../lib/login/css/main.css';
+
+.login100-form-bgbtn {
+    background-color: #0085ad;
+}
