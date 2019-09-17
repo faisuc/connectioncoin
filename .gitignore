@@ -12,3 +12,4 @@ yarn-error.log
 my_cert.crt
 my_key.key
 server.js
+_ide_helper.php
