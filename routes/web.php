@@ -79,14 +79,35 @@ Route::get('users/{user}/stories', 'ShowUserStoriesController')->name('users.sto
 
 Route::get('users/{user}', 'UserController@show')->name('users.show');
 
+Route::get('api/stories', function () {
+    $client = new \GuzzleHttp\Client();
+    $stories = Story::all();
+    $arr = [];
+
+    foreach ($stories as $story) {
+        $response = $client->request('GET', 'https://nominatim.openstreetmap.org/search?q=' . $story->state . ',' . $story->country . '&format=json');
+        $body = json_decode($response->getBody());
+        $lat = $body[0]->lat;
+        $lng = $body[0]->lon;
+
+        $arr[] = [
+            'title' => $story->title,
+            'lat' => $lat,
+            'lng' => $lng
+        ];
+    }
+
+    return response()->json($arr);
+});
+
 Route::get('testlayout', function () {
     return view('twitter');
 });
 
-Route::get('test', function () {
-    $story = Story::where('coin_id', 1)->oldest()->first()->user->email;
-    dd($story);
-});
+Route::get('map', function () {
+    $stories = Story::all();
+    return view('map.index', ['stories' => $stories]);
+})->name('coins.map');
 
 // Route::get('test', function () {
 

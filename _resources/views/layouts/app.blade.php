@@ -19,6 +19,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @yield('css')
+    @yield('js_head')
 </head>
 <body class="container-profile100">
     <div id="app">

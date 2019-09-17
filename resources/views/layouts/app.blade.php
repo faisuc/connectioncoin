@@ -52,6 +52,12 @@
                         @else
 
                             <li class="nav-item">
+                                <a href="{{ route('coins.map') }}" class="nav-link" target="_blank">
+                                    Map
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a href="#" class="nav-link" onclick="event.preventDefault();
                                 document.getElementById('wordpress-store-form').submit();">
                                     Store

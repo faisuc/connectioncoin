@@ -5,14 +5,14 @@ var http            = require('http');
 var fs              = require('fs');
 
 var app = express();
-// var http_server = http.createServer(app).listen(3001);
-var https_server = https.createServer({
-    key: fs.readFileSync('my_key.key'),
-    cert: fs.readFileSync('my_cert.crt')
-}, app).listen(3001);
+var http_server = http.createServer(app).listen(3001);
+// var https_server = https.createServer({
+//     key: fs.readFileSync('my_key.key'),
+//     cert: fs.readFileSync('my_cert.crt')
+// }, app).listen(3001);
 
 var port = process.env.PORT || 3001;
-var io = socket.listen(https_server);
+var io = socket.listen(http_server);
 /*
 http_server.listen(port, () => {
     console.log('Server listening at port %d', port);
