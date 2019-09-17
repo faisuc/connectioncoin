@@ -87,8 +87,8 @@ Route::get('api/stories', function () {
     foreach ($stories as $story) {
         $response = $client->request('GET', 'https://nominatim.openstreetmap.org/search?q=' . $story->state . ',' . $story->country . '&format=json');
         $body = json_decode($response->getBody());
-        $lat = $body[0]->lat;
-        $lng = $body[0]->lon;
+        $lat = isset($body[0]) ? $body[0]->lat : 0;
+        $lng = isset($body[0]) ? $body[0]->lon : 0;
 
         $arr[] = [
             'title' => $story->title,
