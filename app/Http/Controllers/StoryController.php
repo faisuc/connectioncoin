@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotifyOwnerOfTheCoin;
 use App\Story;
 use App\Coin;
 use App\StoryImage;
 use App\User;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Image;
 use Spatie\Image\Manipulations;
@@ -67,10 +69,12 @@ class StoryController extends Controller
             'image' => 'required|image|dimensions:min_width=250,min_height:500'
         ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
 
+        $coin_id = $this->coin->exists($request->input('number'), $request->input('phrase'))->id;
+
         $attributes = array_merge(
             [
                 'user_id' => auth()->id(),
-                'coin_id' => $this->coin->exists($request->input('number'), $request->input('phrase'))->id
+                'coin_id' => $coin_id
             ],
             $request->only('title', 'description', 'city', 'state', 'province', 'country')
         );
@@ -97,6 +101,13 @@ class StoryController extends Controller
             // $path = Storage::putfile('public/story/images', $request->file('image'));
             StoryImage::create(['story_id' => $story->id, 'filepath' => 'public/story/images/' . $filenameToStore]);
         }
+
+        $story = Story::where('coin_id', $coin_id)->oldest()->first();
+        $coinOwner = $story->user;
+
+        Mail::to($coinOwner->email)->send(
+            new NotifyOwnerOfTheCoin($story)
+        );
 
         return redirect()->route('stories.show', ['story' => $story])->with('success', 'Story has been added.');
 

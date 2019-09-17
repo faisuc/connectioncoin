@@ -83,6 +83,11 @@ Route::get('testlayout', function () {
     return view('twitter');
 });
 
+Route::get('test', function () {
+    $story = Story::where('coin_id', 1)->oldest()->first()->user->email;
+    dd($story);
+});
+
 // Route::get('test', function () {
 
 //     return view('layouts.auth');
