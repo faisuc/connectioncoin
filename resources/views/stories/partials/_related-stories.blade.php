@@ -1,5 +1,5 @@
 @if (count($relatedStories))
-    <h3 class="text-white">Related Stories</h3>
+    <h3 class="text-white">Connected Stories</h3>
     <div class="row">
         @foreach ($relatedStories as $story)
             <div class="col-md-4 mb-3">
