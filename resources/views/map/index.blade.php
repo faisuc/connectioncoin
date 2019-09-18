@@ -131,6 +131,10 @@
     // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
     function initMap() {
+
+        jQuery('#pac-container input').hide();
+        jQuery('#pac-container').append('<b>Loading map... Please wait...</b>');
+
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: -33.8688, lng: 151.2195},
             zoom: 13
@@ -147,7 +151,10 @@
         var locations = [];
 
         jQuery.getJSON('/api/stories', function (data) {
-            console.log(data);
+
+            jQuery('#pac-container b').remove();
+            jQuery('#pac-container input').show();
+
             for (var i = 0; i < data.length; i++) {
                 var title = data[i].title;
                 var lat = data[i].lat;
