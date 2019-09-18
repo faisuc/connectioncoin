@@ -85,10 +85,10 @@ Route::get('api/stories', function () {
     $arr = [];
 
     foreach ($stories as $story) {
-        $response = $client->request('GET', 'https://nominatim.openstreetmap.org/search?q=' . $story->state . ',' . $story->country . '&format=json');
+        $response = $client->request('GET', 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $story->state . ',' . $story->country . '&key=AIzaSyBtlMpCUG3d_9DRX9ANhv753HRnTHHaX9g');
         $body = json_decode($response->getBody());
-        $lat = isset($body[0]) ? $body[0]->lat : 0;
-        $lng = isset($body[0]) ? $body[0]->lon : 0;
+        $lat = $body->results[0]->geometry->location->lat;
+        $lng = $body->results[0]->geometry->location->lng;
 
         $arr[] = [
             'title' => $story->title,

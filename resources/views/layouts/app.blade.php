@@ -22,7 +22,6 @@
     @yield('css')
 </head>
 <body class="container-profile100">
-    <div id="app">
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
@@ -111,7 +110,6 @@
         <main>
             @yield('content')
         </main>
-    </div>
     <!-- Scripts -->
     <script type="text/javascript">
         var APP_URL = {!! json_encode(url('/')) !!}
