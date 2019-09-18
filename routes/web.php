@@ -109,6 +109,9 @@ Route::get('map', function () {
     return view('map.index', ['stories' => $stories]);
 })->name('coins.map');
 
+Route::get('testmap', function () {
+    return view('testmap');
+});
 // Route::get('test', function () {
 
 //     return view('layouts.auth');

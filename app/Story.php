@@ -22,6 +22,8 @@ class Story extends Model
         'state',
         'province',
         'country',
+        'latitude',
+        'longitude',
     ];
 
     public function coin()
