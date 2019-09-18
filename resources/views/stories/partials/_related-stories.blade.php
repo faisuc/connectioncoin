@@ -2,7 +2,7 @@
     <h3 class="text-white">Related Stories</h3>
     <div class="row">
         @foreach ($relatedStories as $story)
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <a href="{{ route('stories.show', ['story' => $story->id]) }}" class="custom-card">
                     <div class="card h-100 shadow">
                         <img src="{{ $story->theImage }}" class="card-img-top" alt="{{ $story->title }}">
