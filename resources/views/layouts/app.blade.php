@@ -52,7 +52,7 @@
                         @else
 
                             <li class="nav-item">
-                                <a href="{{ route('coins.map') }}" class="nav-link" target="_blank">
+                                <a href="{{ route('coins.map') }}" class="nav-link">
                                     Map
                                 </a>
                             </li>
