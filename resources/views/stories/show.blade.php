@@ -28,6 +28,7 @@
                         <a href="{{ route('users.show', ['user' => $story->user]) }}"><img src="{{ $story->user->thePhoto }}" title="{{ $story->user->getFullName() }}" class="img-thumbnail rounded-circle" style="width: 30px; height: 30px;"></a></small>
                 </div>
             </div>
+            @include('stories.partials._related-stories')
         </div>
         <div class="col-md-4">
             <h3>Comments</h3>
