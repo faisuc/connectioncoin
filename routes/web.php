@@ -87,8 +87,8 @@ Route::get('api/stories', function () {
     foreach ($stories as $story) {
         $response = $client->request('GET', 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $story->state . ',' . $story->country . '&key=AIzaSyBtlMpCUG3d_9DRX9ANhv753HRnTHHaX9g');
         $body = json_decode($response->getBody());
-        $lat = $body->results[0]->geometry->location->lat;
-        $lng = $body->results[0]->geometry->location->lng;
+        $lat = isset($body->results[0]) ? $body->results[0]->geometry->location->lat : 0;
+        $lng = isset($body->results[0]) ? $body->results[0]->geometry->location->lng : 0;
 
         $arr[] = [
             'title' => $story->title,
