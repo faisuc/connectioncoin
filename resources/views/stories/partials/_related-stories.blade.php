@@ -8,7 +8,7 @@
                         <img src="{{ $story->theImage }}" class="card-img-top" alt="{{ $story->title }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $story->title }}</h5>
-                            <p class="card-text">{{ $story->theDescription }}</p>
+                            <p class="card-text">{!! $story->theDescription !!}</p>
                         </div>
                     </div>
                 </a>
