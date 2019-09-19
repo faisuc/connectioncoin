@@ -1,5 +1,5 @@
 @cannot('update', $story)
-    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#story-report-modal-{{ $story->id }}">Report</a>
+    <a href="#" data-toggle="modal" data-target="#story-report-modal-{{ $story->id }}"><i class="fas fa-flag"></i></a>
     <div class="modal fade" id="story-report-modal-{{ $story->id }}" tabindex="-1" role="dialog" aria-labelledby="story-report-modal-{{ $story->id }}" aria-hidden="true">
         <form action="" method="POST" id="story-report-modal-form-{{ $story->id }}">
             <input type="hidden" name="story_id" value="{{ $story->id }}" />
