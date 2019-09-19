@@ -49414,7 +49414,11 @@ jQuery(document).ready(function ($) {
         url: '/users/info/' + getUrlParameter('user'),
         success: function success(data) {
           var html = '';
-          html += "<div class=\"chat_list active_chat\">\n                                <a href=\"#\" data-user-id=\"" + data.id + "\">\n                                    <div class=\"chat_people\">\n                                        <div class=\"chat_img\">\n                                            <img src=\"" + data.thePhoto + "\" alt=\"sunil\">\n                                        </div>\n                                        <div class=\"chat_ib\">\n                                            <h5>" + data.first_name + ' ' + data.last_name + "</h5>\n                                            <p>i'm good</p>\n                                        </div>\n                                    </div>\n                                </a>\n                            </div>";
+          /* <div class="chat_img">
+                                  <img src="` + data.thePhoto + `" alt="sunil">
+                              </div> */
+
+          html += "<div class=\"chat_list active_chat\">\n                                <a href=\"#\" data-user-id=\"" + data.id + "\">\n                                    <div class=\"chat_people\">\n                                        <div class=\"chat_ib\">\n                                            <h5>" + data.first_name + ' ' + data.last_name + "</h5>\n                                            <p>i'm good</p>\n                                        </div>\n                                    </div>\n                                </a>\n                            </div>";
           $('.messaging .chat_list').removeClass('active_chat');
           $('.messaging .inbox_chat').prepend(html);
           $('.msg_history').attr('data-user-id', data.id);

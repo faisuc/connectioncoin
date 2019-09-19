@@ -297,13 +297,12 @@ jQuery(document).ready(function ($) {
                 url: '/users/info/' + getUrlParameter('user'),
                 success: function (data) {
                     var html = '';
-
+                    /* <div class="chat_img">
+                                            <img src="` + data.thePhoto + `" alt="sunil">
+                                        </div> */
                     html += `<div class="chat_list active_chat">
                                 <a href="#" data-user-id="` + data.id + `">
                                     <div class="chat_people">
-                                        <div class="chat_img">
-                                            <img src="` + data.thePhoto + `" alt="sunil">
-                                        </div>
                                         <div class="chat_ib">
                                             <h5>` + data.first_name + ' ' + data.last_name + `</h5>
                                             <p>i'm good</p>

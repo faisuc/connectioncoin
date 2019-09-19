@@ -23,7 +23,7 @@
                         <div class="chat_list">
                             <a href="#" data-user-id="<?php echo $message->user->id; ?>">
                                 <div class="chat_people">
-                                <div class="chat_img"> <img src="{{ $message->user->thePhoto }}" alt="sunil"> </div>
+                                    {{-- <div class="chat_img"> <img src="{{ $message->user->thePhoto }}" alt="sunil"> </div> --}}
                                     <div class="chat_ib">
                                     <h5>{{ $message->user->getFullName() }} <span class="chat_date">{{ ! is_null($message->user->getLastMessage()) ? $message->user->getLastMessage()->theFormattedTimeAgo : '' }}</span></h5>
                                     <p>{{ ! is_null($message->user->getLastMessage()) ? $message->user->getLastMessage()->text : '' }}</p>
