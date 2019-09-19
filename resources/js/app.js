@@ -365,4 +365,12 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    $(document).on('show.bs.modal', '.modal', function () {
+        $('.far.fa-flag').removeClass('far').addClass('fas');
+    });
+
+    $(document).on('hidden.bs.modal', function (e) {
+        $('.fas.fa-flag').removeClass('fas').addClass('far');
+    })
+
 });
