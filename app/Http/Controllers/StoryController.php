@@ -123,7 +123,7 @@ class StoryController extends Controller
     {
         $this->views['story'] = $story;
         $this->views['comments'] = $story->find($story->id)->comments()->with('user')->get();
-        $this->views['relatedStories'] = $story->where('id', '!=', $story->id)->where('coin_id', $story->coin_id)->get();
+        $this->views['relatedStories'] = $story->where('id', '!=', $story->id)->where('coin_id', $story->coin_id)->latest()->get();
 
         return view('stories.show', $this->views);
     }

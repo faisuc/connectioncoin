@@ -52,6 +52,12 @@
                         @else
 
                             <li class="nav-item">
+                                <a href="{{ route('stories.index') }}" class="nav-link">
+                                    Home
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a href="{{ route('coins.map') }}" class="nav-link">
                                     Map
                                 </a>
