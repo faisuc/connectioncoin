@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Coin;
 use App\Coin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ConnectionController extends Controller
 {
@@ -36,15 +37,23 @@ class ConnectionController extends Controller
      */
     public function store(Request $request, Coin $coin)
     {
-        $this->validate($request, [
-            'number' => 'required',
-            'phrase' => 'required'
-        ]);
+        if (Auth::check()) {
+            $this->validate($request, [
+                'number' => 'required',
+                'phrase' => 'required'
+            ]);
+        } else {
+            $this->validate($request, [
+                'number' => 'required',
+                'phrase' => 'required',
+                'nickname' => 'unique:users,nickname'
+            ]);
+        }
 
         $coin = $coin->exists($request->input('number'), $request->input('phrase'));
 
         if ($coin) {
-            return redirect()->route('stories.create', $request->only('number', 'phrase'));
+            return redirect()->route('stories.create', $request->only('number', 'phrase', 'nickname'));
         } else {
             return redirect()->back()->withErrors("Coin doesn't exists.");
         }

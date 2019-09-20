@@ -42,6 +42,7 @@
                         </div>
                         <input type="hidden" name="number" value="{{ Request::input('number') }}" />
                         <input type="hidden" name="phrase" value="{{ Request::input('phrase') }}" />
+                        <input type="hidden" name="nickname" value="{{ Request::input('nickname') }}" />
                         <button type="submit" class="btn btn-primary btn-lg">Create</button>
                     </form>
 

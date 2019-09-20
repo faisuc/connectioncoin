@@ -9,6 +9,7 @@ use App\StoryImage;
 use App\User;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Image;
@@ -44,8 +45,18 @@ class StoryController extends Controller
     public function create(Request $request)
     {
 
-        if (Gate::denies('create', Story::class)) {
-            return redirect()->route('connections.create')->withErrors('Unable to create story: Please make sure that the coin you entered is valid and if you\'re not the one who last posted a story using this coin.');
+        if (Auth::check()) {
+            if (Gate::denies('create', Story::class)) {
+                return redirect()->route('connections.create')->withErrors('Unable to create story: Please make sure that the coin you entered is valid and if you\'re not the one who last posted a story using this coin.');
+            }
+        } else {
+            $request = \Request::has('number') && \Request::has('phrase');
+            $coin = $this->coin->exists(\Request::input('number'), \Request::input('phrase'));
+            $lastPost = true;
+
+            if (! ($request && $coin && $lastPost)) {
+                return redirect()->route('connections.create')->withErrors('Unable to create story: Please make sure that the coin you entered is valid and if you\'re not the one who last posted a story using this coin.');
+            }
         }
 
         return view('stories.create');
@@ -61,7 +72,9 @@ class StoryController extends Controller
     public function store(Request $request)
     {
 
-        $this->authorize('create', Story::class);
+        if (Auth::check()) {
+            $this->authorize('create', Story::class);
+        }
 
         $this->validate($request, [
             'title' => 'required|min:3',
@@ -71,9 +84,23 @@ class StoryController extends Controller
 
         $coin_id = $this->coin->exists($request->input('number'), $request->input('phrase'))->id;
 
+        if (! Auth::check()) {
+            $user = User::create([
+                'first_name' => null,
+                'last_name' => null,
+                'email' => null,
+                'password' => null,
+                'nickname' => $request->input('nickname'),
+            ]);
+
+            $user_id = $user->id;
+        } else {
+            $user_id = auth()->id;
+        }
+
         $attributes = array_merge(
             [
-                'user_id' => auth()->id(),
+                'user_id' => $user_id,
                 'coin_id' => $coin_id
             ],
             $request->only('title', 'description', 'city', 'state', 'province', 'country')

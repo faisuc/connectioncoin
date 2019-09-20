@@ -12,6 +12,12 @@
 
                     <form method="POST" action="{{ route('connections.store') }}">
                         @csrf
+                        @guest
+                            <div class="form-group">
+                                <label for="nickname">Nickname</label>
+                                <input type="text" class="form-control form-control-lg" name="nickname" id="nickname" placeholder="Enter nickname" value="{{ old('nickname') }}">
+                            </div>
+                        @endguest
                         <div class="form-group">
                             <label for="number">Coin Number</label>
                             <input type="text" class="form-control form-control-lg" name="number" id="number" placeholder="Enter number" value="{{ old('number') }}">

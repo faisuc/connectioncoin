@@ -37,11 +37,16 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::resource('connections', 'Coin\ConnectionController');
+Route::get('stories/create', 'StoryController@create')->name('stories.create');
+Route::post('stories', 'StoryController@store')->name('stories.store');
+
 Route::middleware(['auth', 'verified', 'role:admin|client'])->group(function () {
 
-    Route::resource('connections', 'Coin\ConnectionController');
-
-    Route::resource('stories', 'StoryController')->except(['index']);
+    Route::get('stories/{story}', 'StoryController@show')->name('stories.show');
+    Route::get('stories/{story}/edit', 'StoryController@edit')->name('stories.edit');
+    Route::match(['put', 'patch'], 'stories/{story}', 'StoryController@update')->name('stories.update');
+    Route::delete('stories/{story}', 'StoryController@destroy')->name('stories.destroy');
 
     // Route::get('/conversations/{user_id}', 'MessageController@getMessagesFor');
 

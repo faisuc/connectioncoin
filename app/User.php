@@ -20,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'bio', 'email', 'password', 'photo', 'coverphoto'
+        'first_name', 'last_name', 'bio', 'email', 'password', 'photo', 'coverphoto', 'nickname'
     ];
 
     /**
@@ -97,7 +97,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getFullName()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        if (null == $this->first_name && null == $this->last_name) {
+            return $this->nickname;
+        } else {
+            return $this->first_name . ' ' . $this->last_name;
+        }
     }
 
 }
