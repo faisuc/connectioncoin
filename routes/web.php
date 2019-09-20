@@ -109,10 +109,10 @@ Route::get('testlayout', function () {
     return view('twitter');
 });
 
-Route::get('map', function () {
+Route::get('search', function () {
     $stories = Story::all();
     return view('map.index', ['stories' => $stories]);
-})->name('coins.map');
+})->name('coins.search');
 
 Route::get('testmap', function () {
     return view('testmap');

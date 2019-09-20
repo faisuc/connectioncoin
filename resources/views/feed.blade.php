@@ -16,7 +16,6 @@
                         {{-- <input type="hidden" value="amo" class="facemocion"/> --}}
                         @include('layouts._emotions', ['story' => $story])
                         <div>
-                            @include('stories.partials.report', ['story' => $story])
                             @can('update', $story)
                                 <a href="{{ route('stories.edit', ['story' => $story]) }}" class="btn btn-secondary">Edit</a>
                             @endcan

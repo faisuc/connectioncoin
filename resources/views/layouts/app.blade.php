@@ -42,6 +42,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
+                                <a href="{{ route('connections.create') }}" class="nav-link">
+                                    Create Connection
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
@@ -58,8 +63,8 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route('coins.map') }}" class="nav-link">
-                                    Map
+                                <a href="{{ route('coins.search') }}" class="nav-link">
+                                    Search
                                 </a>
                             </li>
 
