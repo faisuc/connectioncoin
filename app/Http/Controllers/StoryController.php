@@ -95,7 +95,7 @@ class StoryController extends Controller
 
             $user_id = $user->id;
         } else {
-            $user_id = auth()->id;
+            $user_id = auth()->id();
         }
 
         $attributes = array_merge(
