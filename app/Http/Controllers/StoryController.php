@@ -8,8 +8,10 @@ use App\Coin;
 use App\StoryImage;
 use App\User;
 use Gate;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Image;
@@ -76,24 +78,49 @@ class StoryController extends Controller
             $this->authorize('create', Story::class);
         }
 
-        $this->validate($request, [
-            'title' => 'required|min:3',
-            'description' => 'required|min:5',
-            'image' => 'required|image|dimensions:min_width=250,min_height:500'
-        ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
+        if (! $request->has('create_account')) {
+            $this->validate($request, [
+                'title' => 'required|min:3',
+                'description' => 'required|min:5',
+                'image' => 'required|image|dimensions:min_width=250,min_height:500'
+            ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
+        } else {
+            $this->validate($request, [
+                'first_name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'title' => 'required|min:3',
+                'description' => 'required|min:5',
+                'image' => 'required|image|dimensions:min_width=250,min_height:500',
+            ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
+        }
 
         $coin_id = $this->coin->exists($request->input('number'), $request->input('phrase'))->id;
 
         if (! Auth::check()) {
-            $user = User::create([
-                'first_name' => null,
-                'last_name' => null,
-                'email' => null,
-                'password' => null,
-                'nickname' => $request->input('nickname'),
-            ]);
+            if (! $request->has('create_account')) {
+                $user = User::create([
+                    'first_name' => null,
+                    'last_name' => null,
+                    'email' => null,
+                    'password' => null,
+                    'nickname' => $request->input('nickname'),
+                ]);
 
-            $user_id = $user->id;
+                $user_id = $user->id;
+            } else {
+                $user = User::create([
+                    'first_name' => $request->input('first_name'),
+                    'last_name' => $request->input('last_name'),
+                    'email' => $request->input('email'),
+                    'password' => Hash::make($request->input('password')),
+                ]);
+
+                event(new Registered($user));
+
+                $user_id = $user->id;
+            }
         } else {
             $user_id = auth()->id();
         }
@@ -136,7 +163,7 @@ class StoryController extends Controller
             new NotifyOwnerOfTheCoin($story)
         );
 
-        return redirect()->route('stories.show', ['story' => $story])->with('success', 'Story has been added.');
+        return redirect()->route('connections.create', ['story' => $story])->with('success', 'Story has been added.');
 
     }
 

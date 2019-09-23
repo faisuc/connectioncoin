@@ -227,7 +227,7 @@ ul.list-connection-users li:not(:first-of-type) {
   background-attachment: fixed;
 }
 
-input[type=text], textarea, input[type=password] {
+input[type=text], textarea, input[type=password], input[type=email] {
   outline: 0 !important;
   border-width: 0 0 2px !important;
   border-radius: 0 !important;

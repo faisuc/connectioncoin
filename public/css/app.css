@@ -16760,7 +16760,8 @@ ul.list-connection-users li:not(:first-of-type) {
 
 input[type=text],
 textarea,
-input[type=password] {
+input[type=password],
+input[type=email] {
   outline: 0 !important;
   border-width: 0 0 2px !important;
   border-radius: 0 !important;

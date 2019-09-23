@@ -49474,6 +49474,13 @@ jQuery(document).ready(function ($) {
   $(document).on('hidden.bs.modal', function (e) {
     $('.fas.fa-flag').removeClass('fas').addClass('far');
   });
+  $(document).on('change', '#create_account', function () {
+    if ($(this).is(':checked')) {
+      $('.create-account-container').removeClass('d-none');
+    } else {
+      $('.create-account-container').addClass('d-none');
+    }
+  });
 });
 
 /***/ }),
