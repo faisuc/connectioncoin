@@ -83,8 +83,8 @@
                                 @endcan
                             </div>
                             <div class="col-12 col-lg-4 text-center">
-                                <h3 class="mb-0">{{ $user->likes()->count() }}</h3>
-                                <small>Likes</small>
+                                <h3 class="mb-0"><!--{{ $user->likes()->count() }}-->&nbsp;</h3>
+                                <small>&nbsp;</small>
                                 <a href="{{ route('users.stories.index', ['user' => $user]) }}" class="btn btn-block btn-outline-primary mt-3" style="border-radius: 50px;"><i class="fas fa-book"></i> Stories</a>
                             </div>
                             <!--/col-->
