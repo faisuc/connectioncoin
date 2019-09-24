@@ -24,8 +24,14 @@
                 <div class="card-footer">
                     <small class="text-muted">Posted 3 days ago</small>
                     @include('stories.partials.report', ['story' => $story])
-                    <small class="text-muted float-right">Posted by:
-                        <a href="{{ route('users.show', ['user' => $story->user]) }}"><img src="{{ $story->user->thePhoto }}" title="{{ $story->user->getFullName() }}" class="img-thumbnail rounded-circle" style="width: 30px; height: 30px;"></a></small>
+                    <div class="float-right">
+                        <small class="text-muted mr-2">
+                            {{ count($relatedStories) }} Connections Made
+                        </small>
+                        <small class="text-muted">Posted by:
+                            <a href="{{ route('users.show', ['user' => $story->user]) }}"><img src="{{ $story->user->thePhoto }}" title="{{ $story->user->getFullName() }}" class="img-thumbnail rounded-circle" style="width: 30px; height: 30px;"></a>
+                        </small>
+                    </div>
                 </div>
             </div>
             @include('stories.partials._related-stories')
