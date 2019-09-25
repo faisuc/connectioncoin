@@ -49477,8 +49477,10 @@ jQuery(document).ready(function ($) {
   $(document).on('change', '#create_account', function () {
     if ($(this).is(':checked')) {
       $('.create-account-container').removeClass('d-none');
+      $('.nickname-container').addClass('d-none');
     } else {
       $('.create-account-container').addClass('d-none');
+      $('.nickname-container').removeClass('d-none');
     }
   });
 });

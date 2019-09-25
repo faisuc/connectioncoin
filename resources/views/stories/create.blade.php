@@ -41,6 +41,10 @@
                             <input type="text" class="form-control form-control-lg" name="country" id="country" placeholder="Enter country" value="{{ old('country') }}">
                         </div>
                         @guest
+                            <div class="form-group nickname-container">
+                                <label for="nickname">Nickname</label>
+                                <input type="text" class="form-control form-control-lg" name="nickname" id="nickname" placeholder="Enter nickname" value="{{ old('nickname') }}">
+                            </div>
                             <div class="form-group">
                                 <label for="create_account">Create Account</label>
                                 <input type="checkbox" name="create_account" id="create_account" {{ old('create_account') ? 'checked' : '' }}>
@@ -120,7 +124,6 @@
                         @endguest
                         <input type="hidden" name="number" value="{{ Request::input('number') }}" />
                         <input type="hidden" name="phrase" value="{{ Request::input('phrase') }}" />
-                        <input type="hidden" name="nickname" value="{{ Request::input('nickname') }}" />
                         <button type="submit" class="btn btn-primary btn-lg">Create</button>
                     </form>
 

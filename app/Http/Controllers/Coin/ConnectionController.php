@@ -37,23 +37,15 @@ class ConnectionController extends Controller
      */
     public function store(Request $request, Coin $coin)
     {
-        if (Auth::check()) {
-            $this->validate($request, [
-                'number' => 'required',
-                'phrase' => 'required'
-            ]);
-        } else {
-            $this->validate($request, [
-                'number' => 'required',
-                'phrase' => 'required',
-                'nickname' => 'unique:users,nickname'
-            ]);
-        }
+        $this->validate($request, [
+            'number' => 'required',
+            'phrase' => 'required'
+        ]);
 
         $coin = $coin->exists($request->input('number'), $request->input('phrase'));
 
         if ($coin) {
-            return redirect()->route('stories.create', $request->only('number', 'phrase', 'nickname'));
+            return redirect()->route('stories.create', $request->only('number', 'phrase'));
         } else {
             return redirect()->back()->withErrors("Coin doesn't exists.");
         }

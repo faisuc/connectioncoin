@@ -78,22 +78,31 @@ class StoryController extends Controller
             $this->authorize('create', Story::class);
         }
 
-        if (! $request->has('create_account')) {
+        if (Auth::check()) {
             $this->validate($request, [
                 'title' => 'required|min:3',
                 'description' => 'required|min:5',
                 'image' => 'required|image|dimensions:min_width=250,min_height:500'
             ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
         } else {
-            $this->validate($request, [
-                'first_name' => ['required', 'string', 'max:255'],
-                'last_name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-                'title' => 'required|min:3',
-                'description' => 'required|min:5',
-                'image' => 'required|image|dimensions:min_width=250,min_height:500',
-            ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
+            if (! $request->has('create_account')) {
+                $this->validate($request, [
+                    'title' => 'required|min:3',
+                    'description' => 'required|min:5',
+                    'image' => 'required|image|dimensions:min_width=250,min_height:500',
+                    'nickname' => 'required|min:5|unique:users,nickname',
+                ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
+            } else {
+                $this->validate($request, [
+                    'first_name' => ['required', 'string', 'max:255'],
+                    'last_name' => ['required', 'string', 'max:255'],
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                    'password' => ['required', 'string', 'min:8', 'confirmed'],
+                    'title' => 'required|min:3',
+                    'description' => 'required|min:5',
+                    'image' => 'required|image|dimensions:min_width=250,min_height:500',
+                ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
+            }
         }
 
         $coin_id = $this->coin->exists($request->input('number'), $request->input('phrase'))->id;
