@@ -49483,6 +49483,11 @@ jQuery(document).ready(function ($) {
       $('.nickname-container').removeClass('d-none');
     }
   });
+  $(document).on('click', '.see-more-connections', function (e) {
+    e.preventDefault();
+    $(this).parent().parent().find('li').removeClass('d-none');
+    $(this).parent().remove();
+  });
 });
 
 /***/ }),

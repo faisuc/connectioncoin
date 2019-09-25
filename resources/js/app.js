@@ -383,4 +383,10 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    $(document).on('click', '.see-more-connections', function (e) {
+        e.preventDefault();
+        $(this).parent().parent().find('li').removeClass('d-none');
+        $(this).parent().remove();
+    });
+
 });
