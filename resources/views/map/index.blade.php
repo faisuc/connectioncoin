@@ -157,10 +157,11 @@
 
                     for (var i = 0; i < data.length; i++) {
                         var title = data[i].title;
+                        var id = data[i].id;
                         var lat = data[i].lat;
                         var lng = data[i].lng;
 
-                        locations.push([title, lat, lng]);
+                        locations.push([title, lat, lng, id]);
                     }
 
 
@@ -176,7 +177,7 @@
 
                         google.maps.event.addListener(marker, 'click', (function (marker, i) {
                             return function () {
-                                infowindow.setContent(locations[i][0]);
+                                infowindow.setContent('<a href="/stories/' + locations[i][3] + '">' + locations[i][0] + '</a>');
                                 infowindow.open(map, marker);
                             }
                         })(marker, i));

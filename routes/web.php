@@ -97,6 +97,7 @@ Route::get('api/stories', function () {
 
         $arr[] = [
             'title' => $story->title,
+            'id' => $story->id,
             'lat' => $lat,
             'lng' => $lng
         ];
