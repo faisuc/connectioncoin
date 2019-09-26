@@ -64,10 +64,22 @@
                                 </p>
                             </div>
                         </div> --}}
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-lg-12 text-center">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <h3 class="mb-0">{{ $user->stories()->withTrashed()->select('coin_id')->where('user_id', $user->id)->groupBy('coin_id')->count() }}</h3>
+                                        <small>Coins Given</small>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <h3 class="mb-0">{{ $user->stories()->withTrashed()->count() }}</h3>
+                                        <small>Connections Made</small>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-12 col-lg-4 text-center">
-                                <h3 class="mb-0">{{ $user->stories()->withTrashed()->select('coin_id')->where('user_id', $user->id)->groupBy('coin_id')->count() }}</h3>
-                                <small>Coins Given</small>
                                 @can('update', $user)
                                     <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-block btn-outline-success mt-3" style="border-radius: 50px;"><i class="fas fa-user-circle"></i> Edit Profile</a>
                                 @endcan
@@ -76,15 +88,13 @@
                                 @endcan
                             </div>
                             <div class="col-12 col-lg-4 text-center">
-                                <h3 class="mb-0">{{ $user->stories()->withTrashed()->count() }}</h3>
-                                <small>Connections Made</small>
                                 @can('update', $user)
                                     <a href="{{ route('users.coins.index', ['user' => $user]) }}" class="btn btn-block btn-outline-secondary mt-3" style="border-radius: 50px;"><i class="fas fa-coins"></i> Coins</a>
                                 @endcan
                             </div>
                             <div class="col-12 col-lg-4 text-center">
-                                <h3 class="mb-0"><!--{{ $user->likes()->count() }}-->&nbsp;</h3>
-                                <small>&nbsp;</small>
+                                {{-- <h3 class="mb-0"><!--{{ $user->likes()->count() }}-->&nbsp;</h3>
+                                <small>&nbsp;</small> --}}
                                 <a href="{{ route('users.stories.index', ['user' => $user]) }}" class="btn btn-block btn-outline-primary mt-3" style="border-radius: 50px;"><i class="fas fa-book"></i> Stories</a>
                             </div>
                             <!--/col-->
