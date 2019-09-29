@@ -5,7 +5,27 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card mb-3">
-                <img class="card-img-top" src="{{ $story->theImage }}" alt="Card image cap">
+                <div id="sliding" class="carousel slide" data-ride="carousel" data-interval="2000">
+                    <?php $len = !is_null($story->TheOtherImage) ? count($story->TheOtherImage) : 0; ?>
+                    <ul class="carousel-indicators">
+                        @for($i = 0; $i <=$len; $i++ )
+                            <li data-target="#sliding" data-slide-to="{{ $i }}" class="{{ $i == 0 ? 'active' : '' }}"></li>
+                        @endfor
+                    </ul>
+                    
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="card-img-top" src="{{ $story->theImage }}" alt="{{ $story->title }}">
+                        </div>
+
+                        @foreach($story->TheOtherImage as $image)
+                            <div class="carousel-item">
+                                <img class="card-img-top" src="{{ $image }}" alt="{{ $story->title }}">
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
                 <div class="card-body">
                     @include('shared.user-connection-lists')
                     <h3 class="card-title">{{ $story->title }}</h3>

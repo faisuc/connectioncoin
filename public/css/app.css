@@ -4746,8 +4746,9 @@ input[type=button].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  /* border: 1px solid rgba(0, 0, 0, 0.125); */
   border-radius: 0.25rem;
+  overflow: hidden;
 }
 
 .card > hr {
@@ -16793,3 +16794,20 @@ textarea:focus {
   border-radius: 10px 10px 0 0 !important;
 }
 
+/*ameer*/
+.card-mult-img-height{
+  height: 644px;
+  padding:0;
+}
+
+.card-bg-mult-img{
+  background-attachment: inherit;
+  background-position: left;
+}
+.card-img-2-by-2{
+  height: 220px;
+  overflow: hidden;
+  margin-bottom: 2px;
+  background-position: center !important;
+  background-size: cover !important;
+}

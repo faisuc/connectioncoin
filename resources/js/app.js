@@ -388,5 +388,4 @@ jQuery(document).ready(function ($) {
         $(this).parent().parent().find('li').removeClass('d-none');
         $(this).parent().remove();
     });
-
 });

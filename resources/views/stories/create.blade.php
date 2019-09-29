@@ -22,7 +22,7 @@
                         </div>
                         <div class="form-group">
                             <label for="image">Image</label>
-                            <input type="file" class="form-control form-control-lg" name="image" accept="image/x-png,image/gif,image/jpeg" />
+                            <input type="file" class="form-control form-control-lg" name="image[]" multiple accept="image/x-png,image/gif,image/jpeg" />
                         </div>
                         <div class="form-group">
                             <label for="city">City</label>

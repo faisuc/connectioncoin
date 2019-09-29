@@ -62,6 +62,12 @@ class Story extends Model
         return $this->hasOne('App\StoryImage');
     }
 
+    // ameer...
+    public function otherImages()
+    {
+        return $this->hasMany('App\OtherStoryImage');
+    }
+
     public function getTheIsPostedOrUpdatedDatePrefixAttribute()
     {
         $suffix = $this->created_at == $this->updated_at ? 'Posted' : 'Last updated';
@@ -86,6 +92,21 @@ class Story extends Model
         } else {
             return 'https://www.sylvansport.com/wp/wp-content/uploads/2018/11/image-placeholder-1200x800.jpg';
         }
+    }
+
+    //ameer..
+    public function getTheOtherImageAttribute()
+    {
+        $path = array();
+        foreach($this->otherImages as $image){
+             if (isset($image->filepath)) {
+                $path[] =  Storage::url($image->filepath);
+            } else {
+                $path[] =  'https://www.sylvansport.com/wp/wp-content/uploads/2018/11/image-placeholder-1200x800.jpg';
+            }   
+        }
+        //dd($path);
+        return $path;
     }
 
     public function getTheResizedImageAttribute()

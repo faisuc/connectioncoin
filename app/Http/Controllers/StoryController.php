@@ -6,6 +6,7 @@ use App\Mail\NotifyOwnerOfTheCoin;
 use App\Story;
 use App\Coin;
 use App\StoryImage;
+use App\OtherStoryImage;
 use App\User;
 use Gate;
 use Illuminate\Auth\Events\Registered;
@@ -46,20 +47,20 @@ class StoryController extends Controller
      */
     public function create(Request $request)
     {
+        // uncomment ameer
+        // if (Auth::check()) {
+        //     if (Gate::denies('create', Story::class)) {
+        //         return redirect()->route('connections.create')->withErrors('Unable to create story: Please make sure that the coin you entered is valid and if you\'re not the one who last posted a story using this coin.');
+        //     }
+        // } else {
+        //     $request = \Request::has('number') && \Request::has('phrase');
+        //     $coin = $this->coin->exists(\Request::input('number'), \Request::input('phrase'));
+        //     $lastPost = true;
 
-        if (Auth::check()) {
-            if (Gate::denies('create', Story::class)) {
-                return redirect()->route('connections.create')->withErrors('Unable to create story: Please make sure that the coin you entered is valid and if you\'re not the one who last posted a story using this coin.');
-            }
-        } else {
-            $request = \Request::has('number') && \Request::has('phrase');
-            $coin = $this->coin->exists(\Request::input('number'), \Request::input('phrase'));
-            $lastPost = true;
-
-            if (! ($request && $coin && $lastPost)) {
-                return redirect()->route('connections.create')->withErrors('Unable to create story: Please make sure that the coin you entered is valid and if you\'re not the one who last posted a story using this coin.');
-            }
-        }
+        //     if (! ($request && $coin && $lastPost)) {
+        //         return redirect()->route('connections.create')->withErrors('Unable to create story: Please make sure that the coin you entered is valid and if you\'re not the one who last posted a story using this coin.');
+        //     }
+        // }
 
         return view('stories.create');
 
@@ -82,14 +83,14 @@ class StoryController extends Controller
             $this->validate($request, [
                 'title' => 'required|min:3',
                 'description' => 'required|min:5',
-                'image' => 'required|image|dimensions:min_width=250,min_height:500'
+                'image.*' => 'required|image|dimensions:min_width=250,min_height:500'
             ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
         } else {
             if (! $request->has('create_account')) {
                 $this->validate($request, [
                     'title' => 'required|min:3',
                     'description' => 'required|min:5',
-                    'image' => 'required|image|dimensions:min_width=250,min_height:500',
+                    'image.*' => 'required|image|dimensions:min_width=250,min_height:500',
                     'nickname' => 'required|min:5|unique:users,nickname',
                 ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
             } else {
@@ -100,12 +101,13 @@ class StoryController extends Controller
                     'password' => ['required', 'string', 'min:8', 'confirmed'],
                     'title' => 'required|min:3',
                     'description' => 'required|min:5',
-                    'image' => 'required|image|dimensions:min_width=250,min_height:500',
+                    'image.*' => 'required|image|dimensions:min_width=250,min_height:500',
                 ], ['image.dimensions' => 'Please upload an image that has a minimum width of 250px and minimum height of 500px']);
             }
         }
 
-        $coin_id = $this->coin->exists($request->input('number'), $request->input('phrase'))->id;
+        // commented...ameer...
+        $coin_id = $this->coin->exists($request->input('number'), $request->input('phrase'))->id;    
 
         if (! Auth::check()) {
             if (! $request->has('create_account')) {
@@ -141,36 +143,58 @@ class StoryController extends Controller
             ],
             $request->only('title', 'description', 'city', 'state', 'province', 'country')
         );
+        
 
+        // ameer...commented///
         $story = Story::create($attributes);
 
         if ($request->hasFile('image')) {
 
-            $filenameWithExtension = $request->file('image')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
-            $extension =$request->file('image')->getClientOriginalExtension();
-            $time = time();
-            $filenameToStore = $filename . '_' . $time . '.' . $extension;
-            $filenameToStoreResize = $filename . '_' . $time . '-497x290.' . $extension;
+            // ameer...
+            foreach ($request->file('image') as $image) {
+                //dd($image);
 
-            $request->file('image')->storeAs('public/story/images', $filenameToStore);
+                $filenameWithExtension = $image->getClientOriginalName();
+                $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+                $extension =$image->getClientOriginalExtension();
+                $time = time();
+                $filenameToStore = $filename . '_' . $time . '.' . $extension;
+                $filenameToStoreResize = $filename . '_' . $time . '-497x290.' . $extension;
 
+                $image->storeAs('public/story/images', $filenameToStore);
+
+                // $path = Storage::putfile('public/story/images', $request->file('image'));
+
+                Image::load(storage_path('app/public/story/images/' . $filenameToStore))
+                        ->fit(Manipulations::FIT_FILL, 497, 290)
+                        ->save(storage_path('app/public/story/images/' . $filenameToStoreResize));
+
+
+                $filenameToStoreArr[] = $filenameToStore; 
+            }
+
+            // ameer..
+            $primary_img = array_shift($filenameToStoreArr);
             // $path = Storage::putfile('public/story/images', $request->file('image'));
+            
+            //ameer...
+            //StoryImage::create(['story_id' => $story->id, 'filepath' => 'public/story/images/' . $filenameToStore]);
+            StoryImage::create(['story_id' => $story->id, 'filepath' => 'public/story/images/' . $primary_img]);
 
-            Image::load(storage_path('app/public/story/images/' . $filenameToStore))
-                    ->fit(Manipulations::FIT_FILL, 497, 290)
-                    ->save(storage_path('app/public/story/images/' . $filenameToStoreResize));
-
-            // $path = Storage::putfile('public/story/images', $request->file('image'));
-            StoryImage::create(['story_id' => $story->id, 'filepath' => 'public/story/images/' . $filenameToStore]);
+            foreach ($filenameToStoreArr as $row) {
+                OtherStoryImage::create(['story_id' => $story->id, 'filepath' => 'public/story/images/' . $row]);
+            }
+            
         }
-
+        //uncomment it ameer
         $story = Story::where('coin_id', $coin_id)->oldest()->first();
         $coinOwner = $story->user;
 
         Mail::to($coinOwner->email)->send(
             new NotifyOwnerOfTheCoin($story)
         );
+
+        
 
         return redirect()->route('connections.create', ['story' => $story])->with('success', 'Story has been added.');
 
