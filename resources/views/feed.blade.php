@@ -49,8 +49,8 @@
                           <div class="row">
                             <div class="col-md-6 card-mult-img-height card-bg-mult-img" style="background: url('{{ $story->TheImage }}')"></div>
                             <div id="sideImages" class="col-md-6" style="padding: 0;">
-                              <div style="background-image: url({{$story->TheOtherImage[0]}});height: 50%; background-position: center; background-size: cover;"  style="padding: 0;"></div>
-                              <div style="background-image: url({{$story->TheOtherImage[1]}}); height: 50%; background-position: center; background-size: cover;"  style="padding: 0;">
+                              <div style="background-image: url('{{$story->TheOtherImage[0]}}');height: 50%; background-position: center; background-size: cover;"  style="padding: 0;"></div>
+                              <div style="background-image: url('{{$story->TheOtherImage[1]}}'); height: 50%; background-position: center; background-size: cover;"  style="padding: 0;">
                                  {{-- @if( ( count($story->theImage) - 3 ) != 0  )
                                     <span>{{count($story->theImage) - 3}}</span> 
                                   @endif --}}

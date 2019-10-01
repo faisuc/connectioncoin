@@ -23,7 +23,7 @@
                         </div>
                         <div class="form-group">
                             <label for="image">Image</label>
-                            <input type="file" class="form-control form-control-lg" name="image" accept="image/x-png,image/gif,image/jpeg" />
+                            <input type="file" class="form-control form-control-lg" name="image" accept="image/x-png,image/gif,image/jpeg" multiple/>
                             <small id="imageHelp" class="form-text text-muted">Leave this blank if you don't want to update the image.</small>
                             <img src="{{ $story->theImage }}" class="img-fluid" alt="Responsive image">
                         </div>

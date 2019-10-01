@@ -255,3 +255,21 @@ input:focus, textarea:focus {
 .card-header {
   border-radius: 10px 10px 0 0 !important;
 }
+
+/*ameer*/
+.card-mult-img-height{
+  height: 644px;
+  padding:0;
+}
+
+.card-bg-mult-img{
+  background-attachment: inherit;
+  background-position: left;
+}
+.card-img-2-by-2{
+  height: 220px;
+  overflow: hidden;
+  margin-bottom: 2px;
+  background-position: center !important;
+  background-size: cover !important;
+}

@@ -145,7 +145,7 @@ class StoryController extends Controller
         );
         
 
-        // ameer...commented///
+        // ameer..
         $story = Story::create($attributes);
 
         if ($request->hasFile('image')) {
@@ -185,8 +185,8 @@ class StoryController extends Controller
                 OtherStoryImage::create(['story_id' => $story->id, 'filepath' => 'public/story/images/' . $row]);
             }
             
-        }
-        //uncomment it ameer
+        }//ameer..
+        
         $story = Story::where('coin_id', $coin_id)->oldest()->first();
         $coinOwner = $story->user;
 
@@ -197,7 +197,6 @@ class StoryController extends Controller
         
 
         return redirect()->route('connections.create', ['story' => $story])->with('success', 'Story has been added.');
-
     }
 
     /**
